@@ -167,8 +167,11 @@ const App: React.FC = () => {
     ctx.globalCompositeOperation = 'source-over';
   }, [strokes, canvasSize, panOffset]);
 
-  useEffect(() => renderBackground(), [renderBackground]);
-  useEffect(() => renderDrawing(), [renderDrawing]);
+  // Render background and drawing when strokes or canvas properties change
+  useEffect(() => {
+    renderBackground();
+    renderDrawing();
+  }, [strokes, canvasStyle, importedImage, panOffset, canvasSize]);
 
   const undo = useCallback(() => {
     setStrokes(prev => {

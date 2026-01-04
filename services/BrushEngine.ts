@@ -417,9 +417,9 @@ export class BrushEngine {
       case 'spray':
         ctx.globalAlpha = opacity * 0.3;
         const radius = size * 2;
-        const density = 15;
+        const sprayDensity = 15;
         for (let i = 0; i < points.length; i++) {
-          for (let j = 0; j < density; j++) {
+          for (let j = 0; j < sprayDensity; j++) {
             const angle = Math.random() * Math.PI * 2;
             const distance = Math.random() * radius;
             const x = points[i].x + Math.cos(angle) * distance;
@@ -525,7 +525,7 @@ export class BrushEngine {
         break;
       case 'airbrush':
         ctx.globalAlpha = opacity * 0.3;
-        const density = 20;
+        const airbrushDensity = 20;
         const baseRadius = size;
 
         for (let i = 0; i < points.length; i++) {
@@ -533,7 +533,7 @@ export class BrushEngine {
           const radius = baseRadius * 2;
 
           // Draw multiple particles around each point
-          for (let j = 0; j < density; j++) {
+          for (let j = 0; j < airbrushDensity; j++) {
             const angle = Math.random() * Math.PI * 2;
             const distance = Math.random() * radius;
             const x = point.x + Math.cos(angle) * distance;
