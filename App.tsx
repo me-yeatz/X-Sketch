@@ -94,6 +94,15 @@ const App: React.FC = () => {
     palmEngine.current.updateConfig(palmRejection);
   }, [palmRejection]);
 
+  // Update body class for scrolling behavior
+  useEffect(() => {
+    if (showLandingPage) {
+      document.body.className = 'landing-page';
+    } else {
+      document.body.className = 'drawing-app';
+    }
+  }, [showLandingPage]);
+
   const renderBackground = useCallback(() => {
     const ctx = backgroundCanvasRef.current?.getContext('2d');
     if (!ctx) return;

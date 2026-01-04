@@ -18,13 +18,22 @@
         body, html {
             margin: 0;
             padding: 0;
-            overflow: hidden;
             height: 100%;
             width: 100%;
             background-color: var(--cyber-dark);
-            touch-action: none;
             font-family: 'Inter', sans-serif;
             color: var(--cyber-cream);
+        }
+
+        /* Allow scrolling on landing page, prevent on drawing app */
+        body.landing-page {
+            overflow: auto;
+            touch-action: auto;
+        }
+
+        body.drawing-app {
+            overflow: hidden;
+            touch-action: none;
         }
         #root {
             height: 100%;
