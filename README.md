@@ -1,6 +1,6 @@
-<p align="center">
-  <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</p>
+<div align="center">
+  <img src="./public/screenshot-Desktop.png" alt="X-Sketch Pro - Cyber Drive Sketching System" width="100%" />
+</div>
 
 <h1 align="center">X-Sketch Pro: Advanced Tablet Sketching</h1>
 
@@ -28,14 +28,16 @@
 
 <h2 align="center">Professional-grade sketching application optimized for Android tablets</h2>
 
-<p align="center">Featuring multi-layer palm rejection, low-latency ink rendering, and a robust brush engine.<br/>Cyberpunk aesthetics. Functional purpose.</p>
+<p align="center">⚡ <strong>10 brush types</strong> • 🎯 <strong>Palm rejection</strong> • 🖼️ <strong>Layer support</strong> • 📱 <strong>Tablet optimized</strong><br/>
+<strong>Cyberpunk aesthetics meet functional design</strong></p>
 
 ---
 
-## Screenshot
+## Interface Showcase
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" alt="X-Sketch Interface" width="100%" />
+  <img src="./public/screenshot-Desktop.png" alt="X-Sketch Pro Interface" width="100%" />
+  <p><em>X-Sketch Pro running on desktop with cyberpunk UI and full brush engine</em></p>
 </div>
 
 ---

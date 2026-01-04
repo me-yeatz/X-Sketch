@@ -37,8 +37,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp }) => {
             <div className="hidden md:flex items-center gap-8">
               <a href="#features" className="text-[#E2E2D0]/70 hover:text-[#A5D8FF] transition-colors">Features</a>
               <a href="#brushes" className="text-[#E2E2D0]/70 hover:text-[#A5D8FF] transition-colors">Brushes</a>
-              <a href="#canvas" className="text-[#E2E2D0]/70 hover:text-[#A5D8FF] transition-colors">Canvas</a>
-              <button
+            <a href="#canvas" className="text-[#E2E2D0]/70 hover:text-[#A5D8FF] transition-colors">Canvas</a>
+            <a href="#about" className="text-[#E2E2D0]/70 hover:text-[#A5D8FF] transition-colors">About</a>
+            <button
                 onClick={onEnterApp}
                 className="bg-[#72A0C1] text-[#0A0A0C] px-6 py-2 rounded-lg font-semibold hover:bg-[#A5D8FF] transition-colors"
               >
