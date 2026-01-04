@@ -70,7 +70,7 @@ const App: React.FC = () => {
   });
   
   const [rejectedEvents, setRejectedEvents] = useState<{ x: number, y: number, reason: string }[]>([]);
-  const [canvasSize, setCanvasSize] = useState({ width: window.innerWidth, height: window.innerHeight });
+  const [canvasSize, setCanvasSize] = useState({ width: 800, height: 600 }); // Default size, will be updated by useEffect
 
   // --- Refs ---
   const backgroundCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -158,6 +158,7 @@ const App: React.FC = () => {
     const ctx = drawingCanvasRef.current?.getContext('2d');
     if (!ctx) return;
 
+    // Only clear and redraw when strokes change, not when canvas size changes
     ctx.clearRect(0, 0, canvasSize.width, canvasSize.height);
     ctx.save();
     ctx.translate(panOffset.x, panOffset.y);
@@ -169,11 +170,15 @@ const App: React.FC = () => {
     ctx.globalCompositeOperation = 'source-over';
   }, [strokes, canvasSize, panOffset]);
 
-  // Render background and drawing when strokes or canvas properties change
+  // Render background when canvas properties change
   useEffect(() => {
     renderBackground();
+  }, [canvasStyle, importedImage, panOffset, canvasSize]);
+
+  // Render drawing only when strokes change
+  useEffect(() => {
     renderDrawing();
-  }, [strokes, canvasStyle, importedImage, panOffset, canvasSize]);
+  }, [strokes, panOffset]);
 
   const undo = useCallback(() => {
     setStrokes(prev => {
