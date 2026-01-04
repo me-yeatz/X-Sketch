@@ -9,15 +9,12 @@ import {
   Layers,
   Monitor,
   ArrowRight,
-  Maximize,
-  Grid,
   Target,
   Activity,
   Cpu,
-  Database,
-  Globe,
-  Menu,
-  X
+  Grid3X3,
+  Maximize2,
+  ChevronRight
 } from 'lucide-react';
 
 interface LandingPageProps {
@@ -25,74 +22,90 @@ interface LandingPageProps {
 }
 
 const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp }) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
-
   return (
-    <div className="min-h-screen flex flex-col bg-[#F3EFE0] text-[#32292F] font-sans relative overflow-x-hidden">
-      {/* Ambient Background Blobs */}
-      <div className="ambient-blob blob-1"></div>
-      <div className="ambient-blob blob-2"></div>
-      <div className="ambient-blob blob-3"></div>
-
+    <div className="min-h-screen bg-[#0A0A0C] text-[#E2E2D0] font-sans">
       {/* Navigation */}
-      <nav className="nav">
-        <div className="nav-container glass">
-          <div className="nav-brand">
-            <div className="nav-logo">
-              <Globe className="w-6 h-6 stroke-[#FFAB91] fill-none" strokeWidth={2} />
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0C]/95 backdrop-blur-md border-b border-[#72A0C1]/20">
+        <div className="max-w-6xl mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-[#72A0C1] rounded-lg flex items-center justify-center">
+                <Pencil className="w-4 h-4 text-[#0A0A0C]" />
+              </div>
+              <span className="text-xl font-bold text-[#A5D8FF]">X-SKETCH</span>
             </div>
-            <span className="nav-title">X-Sketch</span>
+            <div className="hidden md:flex items-center gap-8">
+              <a href="#features" className="text-[#E2E2D0]/70 hover:text-[#A5D8FF] transition-colors">Features</a>
+              <a href="#brushes" className="text-[#E2E2D0]/70 hover:text-[#A5D8FF] transition-colors">Brushes</a>
+              <a href="#canvas" className="text-[#E2E2D0]/70 hover:text-[#A5D8FF] transition-colors">Canvas</a>
+              <button
+                onClick={onEnterApp}
+                className="bg-[#72A0C1] text-[#0A0A0C] px-6 py-2 rounded-lg font-semibold hover:bg-[#A5D8FF] transition-colors"
+              >
+                Enter App
+              </button>
+            </div>
+            <button className="md:hidden text-[#E2E2D0]">
+              <ChevronRight className="w-6 h-6" />
+            </button>
           </div>
-          <div className={`nav-links ${mobileMenuOpen ? 'mobile-open' : ''}`} id="navLinks">
-            <a href="#features" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Features</a>
-            <a href="#brushes" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Brushes</a>
-            <a href="#canvas" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Canvas</a>
-            <button onClick={onEnterApp} className="nav-cta">Open App</button>
-          </div>
-          <button 
-            className="mobile-menu-btn" 
-            id="mobileMenuBtn" 
-            aria-label="Toggle menu"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? (
-              <X className="w-6 h-6 stroke-[#32292F] fill-none" strokeWidth={1.5} />
-            ) : (
-              <Menu className="w-6 h-6 stroke-[#32292F] fill-none" strokeWidth={1.5} />
-            )}
-          </button>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-container">
-          <div className="hero-badge glass-light">
-            <Pencil className="w-4 h-4 stroke-[#FFAB91] fill-none" strokeWidth={2} />
-            Advanced Sketching
+      <section className="pt-24 pb-16 px-6">
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 bg-[#72A0C1]/10 border border-[#72A0C1]/30 rounded-full px-4 py-2 mb-8">
+            <Target className="w-4 h-4 text-[#A5D8FF]" />
+            <span className="text-sm font-medium text-[#A5D8FF]">ADVANCED SKETCHING</span>
           </div>
-          <h1 className="hero-title">X-Sketch Pro</h1>
-          <p className="hero-tagline">Design your art. Sketch your vision.</p>
-          <p className="hero-subtitle">
-            Professional-grade sketching application optimized for Android tablets. 
+
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            X-SKETCH <span className="text-[#A5D8FF]">PRO</span>
+          </h1>
+
+          <p className="text-xl text-[#E2E2D0]/70 mb-8 max-w-2xl mx-auto">
+            Professional-grade sketching application optimized for Android tablets.
             Featuring multi-layer palm rejection, low-latency ink rendering, and a robust brush engine.
           </p>
-          <div className="hero-buttons">
-            <button onClick={onEnterApp} className="btn-primary">
-              Enter X-Sketch <ArrowRight className="w-4 h-4 ml-2" />
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+            <button
+              onClick={onEnterApp}
+              className="bg-[#A5D8FF] text-[#0A0A0C] px-8 py-4 rounded-xl font-semibold hover:bg-[#A5D8FF]/90 transition-colors flex items-center justify-center gap-2"
+            >
+              Launch X-Sketch Pro
+              <ArrowRight className="w-5 h-5" />
             </button>
-            <a href="https://github.com/me-yeatz/X-Sketch" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+            <a
+              href="https://github.com/me-yeatz/X-Sketch"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-[#72A0C1]/50 text-[#A5D8FF] px-8 py-4 rounded-xl font-semibold hover:bg-[#72A0C1]/10 transition-colors flex items-center justify-center gap-2"
+            >
               View on GitHub
             </a>
           </div>
-          <div className="hero-screenshot glass">
-            <div className="w-full h-64 md:h-96 flex items-center justify-center border-2 border-[#8A9A5B] rounded-xl bg-[#0A0A0C] relative overflow-hidden">
-              <div className="absolute inset-0 pointer-events-none opacity-5 flex items-center justify-center">
-                <Globe size={400} strokeWidth={0.2} className="text-[#72A0C1]" />
-              </div>
-              <div className="text-center z-10">
-                <div className="text-[#A5D8FF] text-xl md:text-2xl font-bold mb-2">X-SKETCH INTERFACE</div>
-                <div className="text-[#72A0C1] text-sm md:text-base">CYBER DRIVE SKETCHING ENVIRONMENT</div>
+
+          {/* Mock Interface Screenshot */}
+          <div className="max-w-4xl mx-auto bg-[#0A0A0C] border border-[#72A0C1]/30 rounded-2xl p-8 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#72A0C1]/5 to-transparent"></div>
+            <div className="relative text-center py-12">
+              <div className="text-[#A5D8FF] text-2xl font-bold mb-4">X-SKETCH INTERFACE</div>
+              <div className="text-[#72A0C1] text-lg">CYBER DRIVE SKETCHING ENVIRONMENT</div>
+              <div className="flex justify-center gap-8 mt-8">
+                <div className="text-center">
+                  <div className="text-[#A5D8FF] font-semibold">STATUS</div>
+                  <div className="text-[#E2E2D0]/70">RUN</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-[#A5D8FF] font-semibold">STABILITY</div>
+                  <div className="text-[#E2E2D0]/70">99.8%</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-[#A5D8FF] font-semibold">LATENCY</div>
+                  <div className="text-[#E2E2D0]/70">4ms</div>
+                </div>
               </div>
             </div>
           </div>
@@ -100,112 +113,136 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp }) => {
       </section>
 
       {/* Features Section */}
-      <section className="features" id="features">
-        <div className="section-container">
-          <div className="section-header">
-            <span className="section-badge glass-light">Features</span>
-            <h2 className="section-title">Everything you need</h2>
+      <section className="py-20 px-6 bg-[#0A0A0C]/50" id="features">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Everything You Need</h2>
+            <p className="text-xl text-[#E2E2D0]/70">Advanced tools for professional digital sketching</p>
           </div>
-          <div className="features-grid">
-            <div className="feature-card glass">
-              <div className="feature-icon">
-                <Brush className="w-7 h-7 stroke-[#FFAB91] fill-none" strokeWidth={1.5} />
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 hover:bg-[#72A0C1]/10 transition-colors">
+              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mb-4">
+                <Brush className="w-6 h-6 text-[#0A0A0C]" />
               </div>
-              <h3 className="feature-title">10 Brush Types</h3>
-              <p className="feature-desc">
-                From smooth ink to watercolor, oil, airbrush and more. Each brush responds to pressure and movement.
-              </p>
+              <h3 className="text-xl font-semibold mb-2">10 Brush Types</h3>
+              <p className="text-[#E2E2D0]/70">From smooth ink to watercolor, oil, airbrush and more. Each brush responds to pressure and movement.</p>
             </div>
-            <div className="feature-card glass">
-              <div className="feature-icon">
-                <Target className="w-7 h-7 stroke-[#FFAB91] fill-none" strokeWidth={1.5} />
+
+            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 hover:bg-[#72A0C1]/10 transition-colors">
+              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mb-4">
+                <Target className="w-6 h-6 text-[#0A0A0C]" />
               </div>
-              <h3 className="feature-title">Palm Rejection</h3>
-              <p className="feature-desc">
-                Advanced palm rejection engine optimized for Android tablets. Prevents accidental touches during sketching.
-              </p>
+              <h3 className="text-xl font-semibold mb-2">Palm Rejection</h3>
+              <p className="text-[#E2E2D0]/70">Advanced palm rejection engine optimized for Android tablets. Prevents accidental touches during sketching.</p>
             </div>
-            <div className="feature-card glass">
-              <div className="feature-icon">
-                <Layers className="w-7 h-7 stroke-[#FFAB91] fill-none" strokeWidth={1.5} />
+
+            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 hover:bg-[#72A0C1]/10 transition-colors">
+              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mb-4">
+                <Layers className="w-6 h-6 text-[#0A0A0C]" />
               </div>
-              <h3 className="feature-title">Layer Support</h3>
-              <p className="feature-desc">
-                Multi-layer canvas with opacity controls. Organize your artwork with dedicated layer management.
-              </p>
+              <h3 className="text-xl font-semibold mb-2">Layer Support</h3>
+              <p className="text-[#E2E2D0]/70">Multi-layer canvas with opacity controls. Organize your artwork with dedicated layer management.</p>
             </div>
-            <div className="feature-card glass">
-              <div className="feature-icon">
-                <Palette className="w-7 h-7 stroke-[#FFAB91] fill-none" strokeWidth={1.5} />
+
+            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 hover:bg-[#72A0C1]/10 transition-colors">
+              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mb-4">
+                <Palette className="w-6 h-6 text-[#0A0A0C]" />
               </div>
-              <h3 className="feature-title">Color System</h3>
-              <p className="feature-desc">
-                Full color palette with opacity controls. Cyber-themed color options optimized for digital art.
-              </p>
+              <h3 className="text-xl font-semibold mb-2">Color System</h3>
+              <p className="text-[#E2E2D0]/70">Full color palette with opacity controls. Cyber-themed color options optimized for digital art.</p>
             </div>
-            <div className="feature-card glass">
-              <div className="feature-icon">
-                <Download className="w-7 h-7 stroke-[#FFAB91] fill-none" strokeWidth={1.5} />
+
+            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 hover:bg-[#72A0C1]/10 transition-colors">
+              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mb-4">
+                <Download className="w-6 h-6 text-[#0A0A0C]" />
               </div>
-              <h3 className="feature-title">Export Options</h3>
-              <p className="feature-desc">
-                Export to PNG, JPG, SVG, and PDF formats. High-quality output for all your creative needs.
-              </p>
+              <h3 className="text-xl font-semibold mb-2">Export Options</h3>
+              <p className="text-[#E2E2D0]/70">Export to PNG, JPG, SVG, and PDF formats. High-quality output for all your creative needs.</p>
             </div>
-            <div className="feature-card glass">
-              <div className="feature-icon">
-                <Monitor className="w-7 h-7 stroke-[#FFAB91] fill-none" strokeWidth={1.5} />
+
+            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 hover:bg-[#72A0C1]/10 transition-colors">
+              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mb-4">
+                <Monitor className="w-6 h-6 text-[#0A0A0C]" />
               </div>
-              <h3 className="feature-title">Tablet Optimized</h3>
-              <p className="feature-desc">
-                Designed specifically for Android tablets like the Infinix XPad. Full stylus and touch support.
-              </p>
+              <h3 className="text-xl font-semibold mb-2">Tablet Optimized</h3>
+              <p className="text-[#E2E2D0]/70">Designed specifically for Android tablets like the Infinix XPad. Full stylus and touch support.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Brushes Section */}
-      <section className="showcase" id="brushes">
-        <div className="section-container">
-          <div className="section-header">
-            <span className="section-badge glass-light">Brush Types</span>
-            <h2 className="section-title">Advanced brush engine</h2>
+      <section className="py-20 px-6" id="brushes">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Advanced Brush Engine</h2>
+            <p className="text-xl text-[#E2E2D0]/70">Precision tools for every creative need</p>
           </div>
-          <div className="showcase-content">
-            <div className="showcase-text">
-              <ul className="showcase-list">
-                <li>
-                  <span className="showcase-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                  <span>Smooth - Uses Quadratic Bezier curves for smooth ink</span>
-                </li>
-                <li>
-                  <span className="showcase-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                  <span>Pencil - Textured, slightly rough edges</span>
-                </li>
-                <li>
-                  <span className="showcase-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                  <span>Marker - Bold, slightly transparent, flat edges</span>
-                </li>
-                <li>
-                  <span className="showcase-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                  <span>Spray - Particle-based spray paint effect</span>
-                </li>
-                <li>
-                  <span className="showcase-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                  <span>Calligraphy - Variable width with angle sensitivity</span>
-                </li>
-              </ul>
+
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-8 bg-[#A5D8FF] rounded flex items-center justify-center flex-shrink-0">
+                  <Target className="w-4 h-4 text-[#0A0A0C]" />
+                </div>
+                <div>
+                  <div className="font-semibold text-[#A5D8FF]">Smooth</div>
+                  <div className="text-[#E2E2D0]/70">Uses Quadratic Bezier curves for smooth ink</div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-8 bg-[#A5D8FF] rounded flex items-center justify-center flex-shrink-0">
+                  <Pencil className="w-4 h-4 text-[#0A0A0C]" />
+                </div>
+                <div>
+                  <div className="font-semibold text-[#A5D8FF]">Pencil</div>
+                  <div className="text-[#E2E2D0]/70">Textured, slightly rough edges</div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-8 bg-[#A5D8FF] rounded flex items-center justify-center flex-shrink-0">
+                  <Activity className="w-4 h-4 text-[#0A0A0C]" />
+                </div>
+                <div>
+                  <div className="font-semibold text-[#A5D8FF]">Marker</div>
+                  <div className="text-[#E2E2D0]/70">Bold, slightly transparent, flat edges</div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-8 bg-[#A5D8FF] rounded flex items-center justify-center flex-shrink-0">
+                  <Zap className="w-4 h-4 text-[#0A0A0C]" />
+                </div>
+                <div>
+                  <div className="font-semibold text-[#A5D8FF]">Spray</div>
+                  <div className="text-[#E2E2D0]/70">Particle-based spray paint effect</div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-8 bg-[#A5D8FF] rounded flex items-center justify-center flex-shrink-0">
+                  <Shield className="w-4 h-4 text-[#0A0A0C]" />
+                </div>
+                <div>
+                  <div className="font-semibold text-[#A5D8FF]">Calligraphy</div>
+                  <div className="text-[#E2E2D0]/70">Variable width with angle sensitivity</div>
+                </div>
+              </div>
             </div>
-            <div className="showcase-image glass-light">
-              <div className="w-full h-64 flex items-center justify-center border-2 border-[#8A9A5B] rounded-xl bg-[#0A0A0C] relative overflow-hidden">
-                <div className="absolute inset-0 pointer-events-none opacity-5 flex items-center justify-center">
-                  <Globe size={400} strokeWidth={0.2} className="text-[#72A0C1]" />
-                </div>
-                <div className="text-center z-10">
-                  <div className="text-[#A5D8FF] text-lg font-bold mb-2">BRUSH PREVIEW</div>
-                  <div className="text-[#72A0C1] text-sm">VARIOUS BRUSH TYPES</div>
-                </div>
+
+            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-8 text-center">
+              <div className="text-[#A5D8FF] text-xl font-bold mb-4">BRUSH PREVIEW</div>
+              <div className="text-[#72A0C1] mb-6">VARIOUS BRUSH TYPES</div>
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div className="text-[#E2E2D0]/70">Watercolor</div>
+                <div className="text-[#E2E2D0]/70">Oil</div>
+                <div className="text-[#E2E2D0]/70">Ink Pen</div>
+                <div className="text-[#E2E2D0]/70">Airbrush</div>
+                <div className="text-[#E2E2D0]/70">Charcoal</div>
+                <div className="text-[#E2E2D0]/70">Digital</div>
               </div>
             </div>
           </div>
@@ -213,51 +250,65 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp }) => {
       </section>
 
       {/* Canvas Styles Section */}
-      <section className="platforms" id="canvas">
-        <div className="section-container">
-          <div className="section-header">
-            <span className="section-badge glass-light">Canvas Options</span>
-            <h2 className="section-title">Multiple background styles</h2>
+      <section className="py-20 px-6 bg-[#0A0A0C]/50" id="canvas">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Multiple Background Styles</h2>
+            <p className="text-xl text-[#E2E2D0]/70">Choose your creative environment</p>
           </div>
-          <div className="platforms-grid">
-            <div className="platform-card glass">
-              <div className="platform-icon">
-                <Maximize className="w-10 h-10 stroke-[#32292F] fill-none" strokeWidth={1.5} />
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 text-center hover:bg-[#72A0C1]/10 transition-colors">
+              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Maximize2 className="w-6 h-6 text-[#0A0A0C]" />
               </div>
-              <h3 className="platform-name">Plain</h3>
+              <h3 className="text-lg font-semibold">Plain</h3>
             </div>
-            <div className="platform-card glass">
-              <div className="platform-icon">
-                <Grid className="w-10 h-10 stroke-[#32292F] fill-none" strokeWidth={1.5} />
+
+            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 text-center hover:bg-[#72A0C1]/10 transition-colors">
+              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Grid3X3 className="w-6 h-6 text-[#0A0A0C]" />
               </div>
-              <h3 className="platform-name">Dotted</h3>
+              <h3 className="text-lg font-semibold">Dotted</h3>
             </div>
-            <div className="platform-card glass">
-              <div className="platform-icon">
-                <Activity className="w-10 h-10 stroke-[#32292F] fill-none" strokeWidth={1.5} />
+
+            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 text-center hover:bg-[#72A0C1]/10 transition-colors">
+              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Activity className="w-6 h-6 text-[#0A0A0C]" />
               </div>
-              <h3 className="platform-name">Sketch</h3>
+              <h3 className="text-lg font-semibold">Sketch</h3>
             </div>
-            <div className="platform-card glass">
-              <div className="platform-icon">
-                <Database className="w-10 h-10 stroke-[#32292F] fill-none" strokeWidth={1.5} />
+
+            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 text-center hover:bg-[#72A0C1]/10 transition-colors">
+              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Cpu className="w-6 h-6 text-[#0A0A0C]" />
               </div>
-              <h3 className="platform-name">Notes</h3>
+              <h3 className="text-lg font-semibold">Notes</h3>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="cta">
-        <div className="cta-container glass">
-          <h2 className="cta-title">Ready to sketch?</h2>
-          <p className="cta-subtitle">No sign-up required. Optimized for Android tablets. Just open and start creating.</p>
-          <div className="cta-buttons">
-            <button onClick={onEnterApp} className="btn-primary">
-              Launch X-Sketch Pro <ArrowRight className="w-5 h-5 ml-2" />
+      <section className="py-20 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Ready to Sketch?</h2>
+          <p className="text-xl text-[#E2E2D0]/70 mb-8">No sign-up required. Optimized for Android tablets. Just open and start creating.</p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              onClick={onEnterApp}
+              className="bg-[#A5D8FF] text-[#0A0A0C] px-8 py-4 rounded-xl font-semibold hover:bg-[#A5D8FF]/90 transition-colors flex items-center justify-center gap-2"
+            >
+              Launch X-Sketch Pro
+              <ArrowRight className="w-5 h-5" />
             </button>
-            <a href="https://github.com/me-yeatz/X-Sketch" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+            <a
+              href="https://github.com/me-yeatz/X-Sketch"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-[#72A0C1]/50 text-[#A5D8FF] px-8 py-4 rounded-xl font-semibold hover:bg-[#72A0C1]/10 transition-colors flex items-center justify-center gap-2"
+            >
               View Source
             </a>
           </div>
@@ -265,643 +316,13 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp }) => {
       </section>
 
       {/* Footer */}
-      <footer className="footer">
-        <p className="footer-text">X-Sketch Pro by <a href="https://github.com/me-yeatz" target="_blank" rel="noopener noreferrer">@me-yeatz</a> | <a href="https://github.com/me-yeatz/X-Sketch" target="_blank" rel="noopener noreferrer">Open Source</a></p>
+      <footer className="py-12 px-6 border-t border-[#72A0C1]/20">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-[#E2E2D0]/60">
+            X-Sketch Pro by <a href="https://github.com/me-yeatz" className="text-[#A5D8FF] hover:text-[#A5D8FF]/80">@me-yeatz</a> | <a href="https://github.com/me-yeatz/X-Sketch" className="text-[#A5D8FF] hover:text-[#A5D8FF]/80">Open Source</a>
+          </p>
+        </div>
       </footer>
-
-      <style jsx>{`
-        /* Ambient Background Blobs */
-        .ambient-blob {
-          position: fixed;
-          border-radius: 50%;
-          filter: blur(80px);
-          z-index: 0;
-          animation: float 20s infinite ease-in-out;
-          pointer-events: none;
-        }
-
-        .blob-1 {
-          width: 40vw;
-          height: 40vw;
-          top: -10%;
-          left: -10%;
-          background: rgba(255, 171, 145, 0.3);
-        }
-
-        .blob-2 {
-          width: 35vw;
-          height: 35vw;
-          bottom: -5%;
-          right: -5%;
-          background: rgba(138, 154, 91, 0.2);
-          animation-delay: 2s;
-        }
-
-        .blob-3 {
-          width: 25vw;
-          height: 25vw;
-          top: 50%;
-          left: 50%;
-          background: rgba(255, 245, 209, 0.6);
-          animation-delay: 4s;
-        }
-
-        @keyframes float {
-          0% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0, 0) scale(1); }
-        }
-
-        /* Glass Panel */
-        .glass {
-          background: rgba(255, 255, 255, 0.6);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          border: 1px solid rgba(255, 255, 255, 0.5);
-          border-radius: 24px;
-        }
-
-        .glass-light {
-          background: rgba(255, 255, 255, 0.4);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border: 1px solid rgba(255, 255, 255, 0.3);
-          border-radius: 20px;
-        }
-
-        /* Navigation */
-        .nav {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          z-index: 1000;
-          padding: 16px 32px;
-        }
-
-        .nav-container {
-          max-width: 1200px;
-          margin: 0 auto;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 12px 24px;
-        }
-
-        .nav-brand {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-
-        .nav-logo {
-          width: 40px;
-          height: 40px;
-          background: var(--charcoal);
-          border-radius: 12px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .nav-title {
-          font-family: 'Cinzel', serif;
-          font-size: 20px;
-          font-weight: 700;
-          color: var(--charcoal);
-          letter-spacing: 1px;
-        }
-
-        .nav-links {
-          display: flex;
-          gap: 32px;
-          align-items: center;
-        }
-
-        .nav-link {
-          color: var(--charcoal);
-          text-decoration: none;
-          font-size: 14px;
-          font-weight: 500;
-          opacity: 0.7;
-          transition: opacity 0.2s ease;
-        }
-
-        .nav-link:hover {
-          opacity: 1;
-        }
-
-        .nav-cta {
-          background: var(--charcoal);
-          color: var(--bone);
-          border: none;
-          padding: 12px 24px;
-          font-family: 'Inter', sans-serif;
-          font-size: 14px;
-          font-weight: 600;
-          border-radius: 12px;
-          text-decoration: none;
-          transition: all 0.2s ease;
-        }
-
-        .nav-cta:hover {
-          background: var(--charcoal-light);
-          transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(50, 41, 47, 0.2);
-        }
-
-        /* Hero Section */
-        .hero {
-          min-height: 100vh;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          padding: 120px 32px 80px;
-          text-align: center;
-          position: relative;
-          z-index: 1;
-        }
-
-        .hero-container {
-          max-width: 900px;
-          margin: 0 auto;
-        }
-
-        .hero-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 8px 16px;
-          margin-bottom: 24px;
-          font-size: 12px;
-          font-weight: 600;
-          color: var(--charcoal);
-          letter-spacing: 1px;
-          text-transform: uppercase;
-        }
-
-        .hero-title {
-          font-family: 'Cinzel', serif;
-          font-size: 72px;
-          font-weight: 700;
-          line-height: 1.1;
-          color: var(--charcoal);
-          margin-bottom: 8px;
-          letter-spacing: -1px;
-        }
-
-        .hero-tagline {
-          font-family: 'Cinzel', serif;
-          font-size: 24px;
-          font-weight: 400;
-          color: var(--charcoal-light);
-          margin-bottom: 24px;
-          letter-spacing: 2px;
-        }
-
-        .hero-subtitle {
-          font-size: 18px;
-          font-weight: 400;
-          color: var(--charcoal);
-          opacity: 0.7;
-          line-height: 1.8;
-          max-width: 600px;
-          margin: 0 auto 40px;
-        }
-
-        .hero-buttons {
-          display: flex;
-          gap: 16px;
-          justify-content: center;
-          margin-bottom: 60px;
-        }
-
-        .btn-primary {
-          background: var(--charcoal);
-          color: var(--bone);
-          border: none;
-          padding: 16px 32px;
-          font-family: 'Inter', sans-serif;
-          font-size: 15px;
-          font-weight: 600;
-          border-radius: 14px;
-          text-decoration: none;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 16px rgba(50, 41, 47, 0.15);
-          display: inline-flex;
-          align-items: center;
-        }
-
-        .btn-primary:hover {
-          background: var(--charcoal-light);
-          transform: translateY(-3px);
-          box-shadow: 0 12px 32px rgba(50, 41, 47, 0.25);
-        }
-
-        .btn-secondary {
-          background: rgba(255, 255, 255, 0.6);
-          color: var(--charcoal);
-          border: 1px solid rgba(50, 41, 47, 0.2);
-          padding: 16px 32px;
-          font-family: 'Inter', sans-serif;
-          font-size: 15px;
-          font-weight: 600;
-          border-radius: 14px;
-          text-decoration: none;
-          transition: all 0.3s ease;
-          backdrop-filter: blur(10px);
-        }
-
-        .btn-secondary:hover {
-          background: rgba(255, 255, 255, 0.8);
-          transform: translateY(-3px);
-          box-shadow: 0 8px 24px rgba(50, 41, 47, 0.1);
-        }
-
-        .hero-screenshot {
-          width: 100%;
-          max-width: 900px;
-          border-radius: 20px;
-          box-shadow: 0 40px 100px rgba(50, 41, 47, 0.2);
-        }
-
-        /* Features Section */
-        .features {
-          padding: 100px 32px;
-          position: relative;
-          z-index: 1;
-        }
-
-        .section-container {
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-
-        .section-header {
-          text-align: center;
-          margin-bottom: 64px;
-        }
-
-        .section-badge {
-          display: inline-block;
-          padding: 8px 16px;
-          margin-bottom: 16px;
-          font-size: 12px;
-          font-weight: 600;
-          color: var(--charcoal);
-          letter-spacing: 2px;
-          text-transform: uppercase;
-        }
-
-        .section-title {
-          font-family: 'Cinzel', serif;
-          font-size: 48px;
-          font-weight: 700;
-          color: var(--charcoal);
-          letter-spacing: -1px;
-        }
-
-        .features-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 24px;
-        }
-
-        .feature-card {
-          padding: 32px;
-          transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 20px 60px rgba(50, 41, 47, 0.1);
-        }
-
-        .feature-icon {
-          width: 56px;
-          height: 56px;
-          background: var(--charcoal);
-          border-radius: 16px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 20px;
-        }
-
-        .feature-title {
-          font-size: 18px;
-          font-weight: 600;
-          margin-bottom: 12px;
-          color: var(--charcoal);
-        }
-
-        .feature-desc {
-          font-size: 14px;
-          color: var(--charcoal);
-          opacity: 0.7;
-          line-height: 1.7;
-        }
-
-        /* Showcase Section */
-        .showcase {
-          padding: 100px 32px;
-          position: relative;
-          z-index: 1;
-        }
-
-        .showcase-content {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 64px;
-          align-items: center;
-          margin-top: 48px;
-        }
-
-        .showcase-list {
-          list-style: none;
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-        }
-
-        .showcase-list li {
-          display: flex;
-          align-items: flex-start;
-          gap: 16px;
-          font-size: 16px;
-          color: var(--charcoal);
-        }
-
-        .showcase-check {
-          width: 28px;
-          height: 28px;
-          background: var(--sage);
-          border-radius: 8px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-        }
-
-        .showcase-check svg {
-          width: 16px;
-          height: 16px;
-          stroke: white;
-          fill: none;
-          stroke-width: 2.5;
-        }
-
-        .showcase-image {
-          padding: 24px;
-        }
-
-        .showcase-image img {
-          width: 100%;
-          border-radius: 16px;
-          box-shadow: 0 20px 60px rgba(50, 41, 47, 0.15);
-        }
-
-        /* Platforms Section */
-        .platforms {
-          padding: 100px 32px;
-          position: relative;
-          z-index: 1;
-        }
-
-        .platforms-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 24px;
-          margin-top: 48px;
-        }
-
-        .platform-card {
-          padding: 40px 24px;
-          text-align: center;
-          transition: all 0.3s ease;
-        }
-
-        .platform-card:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 20px 60px rgba(50, 41, 47, 0.1);
-        }
-
-        .platform-icon {
-          width: 56px;
-          height: 56px;
-          margin: 0 auto 20px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .platform-name {
-          font-size: 16px;
-          font-weight: 600;
-          color: var(--charcoal);
-        }
-
-        /* CTA Section */
-        .cta {
-          padding: 100px 32px;
-          text-align: center;
-          position: relative;
-          z-index: 1;
-        }
-
-        .cta-container {
-          max-width: 800px;
-          margin: 0 auto;
-          padding: 64px;
-        }
-
-        .cta-title {
-          font-family: 'Cinzel', serif;
-          font-size: 48px;
-          font-weight: 700;
-          color: var(--charcoal);
-          margin-bottom: 16px;
-        }
-
-        .cta-subtitle {
-          font-size: 18px;
-          color: var(--charcoal);
-          opacity: 0.7;
-          margin-bottom: 40px;
-          max-width: 500px;
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        .cta-buttons {
-          display: flex;
-          gap: 16px;
-          justify-content: center;
-        }
-
-        /* Footer */
-        .footer {
-          padding: 32px;
-          text-align: center;
-          position: relative;
-          z-index: 1;
-        }
-
-        .footer-text {
-          color: var(--charcoal);
-          font-size: 14px;
-          opacity: 0.6;
-        }
-
-        .footer-text a {
-          color: var(--charcoal);
-          text-decoration: none;
-          font-weight: 500;
-        }
-
-        .footer-text a:hover {
-          opacity: 1;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-btn {
-          display: none;
-          background: transparent;
-          border: none;
-          cursor: pointer;
-          padding: 8px;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-          .features-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-
-          .platforms-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-
-        @media (max-width: 768px) {
-          .nav {
-            padding: 12px 20px;
-          }
-
-          .nav-links {
-            display: none;
-          }
-
-          .mobile-menu-btn {
-            display: block;
-          }
-
-          .nav-links.mobile-open {
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            top: 80px;
-            left: 20px;
-            right: 20px;
-            padding: 24px;
-            gap: 20px;
-            background: rgba(243, 239, 224, 0.9);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-          }
-
-          .hero {
-            padding: 100px 20px 60px;
-          }
-
-          .hero-title {
-            font-size: 42px;
-          }
-
-          .hero-tagline {
-            font-size: 18px;
-          }
-
-          .hero-subtitle {
-            font-size: 16px;
-          }
-
-          .hero-buttons {
-            flex-direction: column;
-            width: 100%;
-            max-width: 300px;
-            margin-left: auto;
-            margin-right: auto;
-          }
-
-          .btn-primary, .btn-secondary {
-            text-align: center;
-            width: 100%;
-          }
-
-          .features {
-            padding: 60px 20px;
-          }
-
-          .features-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .section-title {
-            font-size: 32px;
-          }
-
-          .showcase {
-            padding: 60px 20px;
-          }
-
-          .showcase-content {
-            grid-template-columns: 1fr;
-            gap: 40px;
-          }
-
-          .platforms {
-            padding: 60px 20px;
-          }
-
-          .platforms-grid {
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-          }
-
-          .cta {
-            padding: 60px 20px;
-          }
-
-          .cta-container {
-            padding: 40px 24px;
-          }
-
-          .cta-title {
-            font-size: 32px;
-          }
-
-          .cta-buttons {
-            flex-direction: column;
-            max-width: 300px;
-            margin-left: auto;
-            margin-right: auto;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .hero-title {
-            font-size: 36px;
-          }
-
-          .platforms-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-      `}</style>
     </div>
   );
 };
