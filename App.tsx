@@ -30,12 +30,14 @@ import {
 } from 'lucide-react';
 import {
   ToolType,
+  BrushType,
   Stroke,
   Point,
   PalmRejectionLevel,
   PalmRejectionConfig,
   CanvasStyle,
-  ExportFormat
+  ExportFormat,
+  Layer
 } from './types';
 import { PalmRejectionEngine } from './services/PalmRejectionEngine';
 import { BrushEngine } from './services/BrushEngine';
