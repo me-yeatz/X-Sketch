@@ -1,0 +1,23 @@
+
+<!-- 
+  This file is for structural reference in the project request.
+  Actual deployment in a React context uses metadata.json or Capacitor/Cordova wrappers.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.xsketch.pro">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <application
+        android:hardwareAccelerated="true"
+        android:largeHeap="true"
+        android:theme="@style/Theme.Material3.DayNight.NoActionBar">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustResize"
+            android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

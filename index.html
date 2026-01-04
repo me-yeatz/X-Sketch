@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>X-SKETCH // CYBER DRIVE OS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Roboto+Mono:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cyber-dark: #0A0A0C;
+            --cyber-blue: #72A0C1;
+            --cyber-cyan: #A5D8FF;
+            --cyber-cream: #E2E2D0;
+            --cyber-red: #EF4444;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            background-color: var(--cyber-dark);
+            touch-action: none;
+            font-family: 'Inter', sans-serif;
+            color: var(--cyber-cream);
+        }
+        #root {
+            height: 100%;
+            width: 100%;
+        }
+        canvas {
+            touch-action: none;
+            image-rendering: pixelated;
+        }
+        .pixel-font {
+            font-family: 'VT323', monospace;
+        }
+        .mono-font {
+            font-family: 'Roboto Mono', monospace;
+        }
+        .cyber-border {
+            border: 2px solid var(--cyber-blue);
+            box-shadow: 2px 2px 0px var(--cyber-dark), 4px 4px 0px var(--cyber-blue);
+        }
+        .cyber-border-thin {
+            border: 1px solid var(--cyber-blue);
+        }
+        .dither-bg {
+            background-image: radial-gradient(var(--cyber-blue) 0.5px, transparent 0.5px);
+            background-size: 3px 3px;
+        }
+        .zebra-bg {
+            background: repeating-linear-gradient(
+                45deg,
+                var(--cyber-blue),
+                var(--cyber-blue) 5px,
+                var(--cyber-dark) 5px,
+                var(--cyber-dark) 10px
+            );
+        }
+        .scanlines {
+            position: relative;
+            overflow: hidden;
+        }
+        .scanlines::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 100;
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+        }
+        .crt-flicker {
+            animation: flicker 0.15s infinite;
+        }
+        @keyframes flicker {
+            0% { opacity: 0.98; }
+            50% { opacity: 1; }
+            100% { opacity: 0.99; }
+        }
+        /* Custom scrollbar for cyber look */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: var(--cyber-dark);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--cyber-blue);
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="scanlines">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

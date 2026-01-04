@@ -1,0 +1,8 @@
+
+{
+  "name": "X-Sketch Pro: Advanced Tablet Sketching",
+  "description": "A professional-grade sketching application optimized for Android tablets like the Infinix XPad, featuring multi-layer palm rejection, low-latency ink rendering, and a robust brush engine.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
