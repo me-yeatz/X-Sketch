@@ -4,6 +4,7 @@
   "description": "Advanced tablet sketching application",
   "start_url": "/",
   "display": "standalone",
+  "orientation": "any",
   "background_color": "#0A0A0C",
   "theme_color": "#A5D8FF",
   "icons": [
