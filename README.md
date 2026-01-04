@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./public/screenshot-Desktop.png" alt="X-Sketch Pro - Cyber Drive Sketching System" width="100%" />
+  
 </div>
 
 <h1 align="center">X-Sketch Pro: Advanced Tablet Sketching</h1>
