@@ -41,11 +41,10 @@ import {
 } from './types';
 import { PalmRejectionEngine } from './services/PalmRejectionEngine';
 import { BrushEngine } from './services/BrushEngine';
-import LandingPage from './components/LandingPage';
 
 const App: React.FC = () => {
   // --- State ---
-  const [showLandingPage, setShowLandingPage] = useState(true);
+  const [showLandingPage, setShowLandingPage] = useState(false);
   const [activeTool, setActiveTool] = useState<ToolType>('pen');
   const [activeBrushType, setActiveBrushType] = useState<BrushType>('smooth');
   const [canvasStyle, setCanvasStyle] = useState<CanvasStyle>('plain');
@@ -103,15 +102,6 @@ const App: React.FC = () => {
   useEffect(() => {
     palmEngine.current.updateConfig(palmRejection);
   }, [palmRejection]);
-
-  // Update body class for scrolling behavior
-  useEffect(() => {
-    if (showLandingPage) {
-      document.body.className = 'landing-page';
-    } else {
-      document.body.className = 'drawing-app';
-    }
-  }, [showLandingPage]);
 
   const renderBackground = useCallback(() => {
     const ctx = backgroundCanvasRef.current?.getContext('2d');

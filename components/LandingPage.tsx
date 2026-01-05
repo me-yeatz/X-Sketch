@@ -1,21 +1,4 @@
 import React from 'react';
-import {
-  Pencil,
-  Brush,
-  Palette,
-  Download,
-  Zap,
-  Shield,
-  Layers,
-  Monitor,
-  ArrowRight,
-  Target,
-  Activity,
-  Cpu,
-  Grid3X3,
-  Maximize2,
-  ChevronRight
-} from 'lucide-react';
 
 interface LandingPageProps {
   onEnterApp: () => void;
@@ -25,305 +8,99 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp }) => {
   return (
     <div className="min-h-screen bg-[#0A0A0C] text-[#E2E2D0] font-sans">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0C]/95 backdrop-blur-md border-b border-[#72A0C1]/20">
-        <div className="max-w-6xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-[#72A0C1] rounded-lg flex items-center justify-center">
-                <Pencil className="w-4 h-4 text-[#0A0A0C]" />
-              </div>
-              <span className="text-xl font-bold text-[#A5D8FF]">X-SKETCH</span>
-            </div>
-            <div className="hidden md:flex items-center gap-8">
-              <a href="#features" className="text-[#E2E2D0]/70 hover:text-[#A5D8FF] transition-colors">Features</a>
-              <a href="#brushes" className="text-[#E2E2D0]/70 hover:text-[#A5D8FF] transition-colors">Brushes</a>
-            <a href="#canvas" className="text-[#E2E2D0]/70 hover:text-[#A5D8FF] transition-colors">Canvas</a>
-            <a href="#about" className="text-[#E2E2D0]/70 hover:text-[#A5D8FF] transition-colors">About</a>
-            <button
-                onClick={onEnterApp}
-                className="bg-[#72A0C1] text-[#0A0A0C] px-6 py-2 rounded-lg font-semibold hover:bg-[#A5D8FF] transition-colors"
-              >
-                Enter App
-              </button>
-            </div>
-            <button className="md:hidden text-[#E2E2D0]">
-              <ChevronRight className="w-6 h-6" />
-            </button>
-          </div>
+      <nav className="fixed top-0 left-0 right-0 z-[1000] bg-[#0A0A0C] border-b-[3px] border-[#72A0C1] px-8 py-4 flex justify-between items-center">
+        <div className="flex items-center gap-2">
+          <div className="w-10 h-10 text-2xl flex items-center justify-center">✏️</div>
+          <span className="text-lg font-bold text-[#E2E2D0] uppercase tracking-tighter">X-SKETCH</span>
+          <span className="text-xs font-bold text-[#A5D8FF] ml-1">PRO</span>
+        </div>
+        <div className="flex gap-6 items-center">
+          <a href="#features" className="text-[#E2E2D0] no-underline font-bold text-xs uppercase tracking-wider border-[2px] border-transparent py-1.5 px-3 hover:text-[#A5D8FF] hover:border-[#A5D8FF] hover:bg-[rgba(165,216,255,0.1)] transition-all">
+            FEATURES
+          </a>
+          <a href="https://github.com/me-yeatz/X-Sketch" target="_blank" className="text-[#E2E2D0] no-underline font-bold text-xs uppercase tracking-wider border-[2px] border-transparent py-1.5 px-3 hover:text-[#A5D8FF] hover:border-[#A5D8FF] hover:bg-[rgba(165,216,255,0.1)] transition-all">
+            GITHUB
+          </a>
+          <button
+            onClick={onEnterApp}
+            className="bg-[#72A0C1] text-[#0A0A0C] border-[3px] border-[#A5D8FF] py-2.5 px-5 font-bold text-xs uppercase tracking-wider inline-block shadow-[4px_4px_0_#A5D8FF]"
+          >
+            LAUNCH_APP
+          </button>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-24 pb-16 px-6">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-[#72A0C1]/10 border border-[#72A0C1]/30 rounded-full px-4 py-2 mb-8">
-            <Target className="w-4 h-4 text-[#A5D8FF]" />
-            <span className="text-sm font-medium text-[#A5D8FF]">ADVANCED SKETCHING</span>
+      <section className="min-h-screen grid grid-cols-2 gap-16 items-center px-16 pt-36 pb-20 max-w-[1600px] mx-auto mt-20">
+        <div className="flex flex-col gap-6">
+          <div className="inline-flex items-center gap-2 bg-[#0A0A0C] text-[#A5D8FF] py-2.5 px-4.5 border-[2px] border-[#A5D8FF] w-fit font-bold text-xs uppercase tracking-widest">
+            <span>⚡</span>
+            <span className="text-[#A5D8FF]">ADVANCED_SKETCHING_SYSTEM</span>
           </div>
-
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+          <h1 className="text-[80px] font-black leading-none uppercase tracking-tighter text-[#E2E2D0]">
             X-SKETCH <span className="text-[#A5D8FF]">PRO</span>
           </h1>
-
-          <p className="text-xl text-[#E2E2D0]/70 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg leading-[1.6] text-[#E2E2D0] opacity-80 max-w-[560px] font-sans">
             Professional-grade sketching application optimized for Android tablets.
             Featuring multi-layer palm rejection, low-latency ink rendering, and a robust brush engine.
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+          <div className="flex gap-4 mt-2">
             <button
               onClick={onEnterApp}
-              className="bg-[#A5D8FF] text-[#0A0A0C] px-8 py-4 rounded-xl font-semibold hover:bg-[#A5D8FF]/90 transition-colors flex items-center justify-center gap-2"
+              className="bg-[#A5D8FF] text-[#0A0A0C] border-[3px] border-[#72A0C1] py-4 px-8 font-bold text-sm uppercase tracking-wider text-decoration-none inline-block shadow-[6px_6px_0_#72A0C1] hover:bg-[#72A0C1] hover:shadow-[8px_8px_0_#A5D8FF] hover:translate-x-[-8px] hover:-translate-y-[8px] transition-all"
             >
-              Launch X-Sketch Pro
-              <ArrowRight className="w-5 h-5" />
+              LAUNCH_X-SKETCH
             </button>
             <a
               href="https://github.com/me-yeatz/X-Sketch"
               target="_blank"
-              rel="noopener noreferrer"
-              className="border border-[#72A0C1]/50 text-[#A5D8FF] px-8 py-4 rounded-xl font-semibold hover:bg-[#72A0C1]/10 transition-colors flex items-center justify-center gap-2"
+              className="bg-[#0A0A0C] text-[#A5D8FF] border-[3px] border-[#72A0C1] py-4 px-8 font-bold text-sm uppercase tracking-wider text-decoration-none inline-block shadow-[6px_6px_0_#72A0C1] hover:bg-[#A5D8FF] hover:text-[#0A0A0C] hover:shadow-[8px_8px_0_#72A0C1] hover:translate-x-[-8px] hover:-translate-y-[8px] transition-all"
             >
-              View on GitHub
+              VIEW_SOURCE
             </a>
           </div>
-
-          {/* Mock Interface Screenshot */}
-          <div className="max-w-4xl mx-auto bg-[#0A0A0C] border border-[#72A0C1]/30 rounded-2xl p-8 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#72A0C1]/5 to-transparent"></div>
-            <div className="relative text-center py-12">
-              <div className="text-[#A5D8FF] text-2xl font-bold mb-4">X-SKETCH INTERFACE</div>
-              <div className="text-[#72A0C1] text-lg">CYBER DRIVE SKETCHING ENVIRONMENT</div>
-              <div className="flex justify-center gap-8 mt-8">
-                <div className="text-center">
-                  <div className="text-[#A5D8FF] font-semibold">STATUS</div>
-                  <div className="text-[#E2E2D0]/70">RUN</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-[#A5D8FF] font-semibold">STABILITY</div>
-                  <div className="text-[#E2E2D0]/70">99.8%</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-[#A5D8FF] font-semibold">LATENCY</div>
-                  <div className="text-[#E2E2D0]/70">4ms</div>
-                </div>
+          <div className="flex gap-12 mt-4 pt-6 border-t-[2px] border-[#72A0C1]">
+            <div className="flex flex-col gap-1">
+              <div className="text-[32px] font-black text-[#A5D8FF] uppercase font-bold">10+</div>
+              <div className="text-xs font-black text-[#E2E2D0] uppercase tracking-widest opacity-60">BRUSH_TYPES</div>
+            </div>
+            <div className="flex flex-col gap-1">
+              <div className="text-[32px] font-black text-[#A5D8FF] uppercase font-bold">4ms</div>
+              <div className="text-xs font-black text-[#E2E2D0] uppercase tracking-widest opacity-60">LATENCY</div>
+            </div>
+            <div className="flex flex-col gap-1">
+              <div className="text-[32px] font-black text-[#A5D8FF] uppercase font-bold">99.8%</div>
+              <div className="text-xs font-black text-[#E2E2D0] uppercase tracking-widest opacity-60">STABILITY</div>
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-center items-center">
+          <div className="bg-[#0A0A0C] border-[3px] border-[#A5D8FF] shadow-[16px_16px_0_#72A0C1] w-full max-w-[540px]">
+            <div className="bg-[#72A0C1] py-3 px-4 flex items-center gap-2 border-b-[3px] border-[#A5D8FF]">
+              <div className="w-[14px] h-[14px] rounded-full border-[2px] border-[#0A0A0C] bg-[#A5D8FF]"></div>
+              <div className="w-[14px] h-[14px] rounded-full border-[2px] border-[#0A0A0C] bg-[#E2E2D0]"></div>
+              <div className="w-[14px] h-[14px] rounded-full border-[2px] border-[#0A0A0C] bg-[#EF4444]"></div>
+              <span className="text-[#0A0A0C] text-xs font-black ml-3 uppercase tracking-wider">CYBER_DRIVE_OS // TERMINAL</span>
+            </div>
+            <div className="p-5">
+              <div className="flex gap-2 mb-4">
+                <div className="bg-[#0A0A0C] border-[2px] border-[#72A0C1] text-[#E2E2D0] py-2 px-4 text-xs font-black uppercase tracking-wider">PEN</div>
+                <div className="bg-[#0A0A0C] border-[2px] border-[#72A0C1] text-[#E2E2D0] py-2 px-4 text-xs font-black uppercase tracking-wider">BRUSH</div>
+                <div className="bg-[#0A0A0C] border-[2px] border-[#72A0C1] text-[#E2E2D0] py-2 px-4 text-xs font-black uppercase tracking-wider">ERASER</div>
+              </div>
+              <div className="bg-[#0D0D10] border-[2px] border-[#72A0C1] h-[280px] relative overflow-hidden">
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(114,160,193,0.1)_1px,_transparent_1px),_linear-gradient(90deg,_rgba(114,160,193,0.1)_1px,_transparent_1px)] bg-[length:20px_20px]"></div>
+                <div className="absolute border-[3px] border-[#A5D8FF] rounded-[50%] opacity-80 demo-stroke-1" style={{ width: '200px', height: '80px', top: '60px', left: '60px', transform: 'rotate(-15deg)' }}></div>
+                <div className="absolute border-[3px] border-[#72A0C1] rounded-[50%] opacity-80 demo-stroke-2" style={{ width: '180px', height: '60px', top: '120px', left: '200px', transform: 'rotate(10deg)' }}></div>
+                <div className="absolute border-[3px] border-[#E2E2D0] rounded-[50%] opacity-80 demo-stroke-3" style={{ width: '150px', height: '50px', top: '180px', left: '100px', transform: 'rotate(-5deg)' }}></div>
+              </div>
+              <div className="bg-[#0A0A0C] border-[2px] border-[#72A0C1] py-2.5 px-4 mt-3 flex justify-between items-center">
+                <span className="text-[#A5D8FF] text-xs font-black uppercase tracking-wider">STATUS: RUN // LATENCY: 4ms</span>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Features Section */}
-      <section className="py-20 px-6 bg-[#0A0A0C]/50" id="features">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Everything You Need</h2>
-            <p className="text-xl text-[#E2E2D0]/70">Advanced tools for professional digital sketching</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 hover:bg-[#72A0C1]/10 transition-colors">
-              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mb-4">
-                <Brush className="w-6 h-6 text-[#0A0A0C]" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">10 Brush Types</h3>
-              <p className="text-[#E2E2D0]/70">From smooth ink to watercolor, oil, airbrush and more. Each brush responds to pressure and movement.</p>
-            </div>
-
-            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 hover:bg-[#72A0C1]/10 transition-colors">
-              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mb-4">
-                <Target className="w-6 h-6 text-[#0A0A0C]" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Palm Rejection</h3>
-              <p className="text-[#E2E2D0]/70">Advanced palm rejection engine optimized for Android tablets. Prevents accidental touches during sketching.</p>
-            </div>
-
-            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 hover:bg-[#72A0C1]/10 transition-colors">
-              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mb-4">
-                <Layers className="w-6 h-6 text-[#0A0A0C]" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Layer Support</h3>
-              <p className="text-[#E2E2D0]/70">Multi-layer canvas with opacity controls. Organize your artwork with dedicated layer management.</p>
-            </div>
-
-            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 hover:bg-[#72A0C1]/10 transition-colors">
-              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mb-4">
-                <Palette className="w-6 h-6 text-[#0A0A0C]" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Color System</h3>
-              <p className="text-[#E2E2D0]/70">Full color palette with opacity controls. Cyber-themed color options optimized for digital art.</p>
-            </div>
-
-            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 hover:bg-[#72A0C1]/10 transition-colors">
-              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mb-4">
-                <Download className="w-6 h-6 text-[#0A0A0C]" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Export Options</h3>
-              <p className="text-[#E2E2D0]/70">Export to PNG, JPG, SVG, and PDF formats. High-quality output for all your creative needs.</p>
-            </div>
-
-            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 hover:bg-[#72A0C1]/10 transition-colors">
-              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mb-4">
-                <Monitor className="w-6 h-6 text-[#0A0A0C]" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Tablet Optimized</h3>
-              <p className="text-[#E2E2D0]/70">Designed specifically for Android tablets like the Infinix XPad. Full stylus and touch support.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Brushes Section */}
-      <section className="py-20 px-6" id="brushes">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Advanced Brush Engine</h2>
-            <p className="text-xl text-[#E2E2D0]/70">Precision tools for every creative need</p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-8 bg-[#A5D8FF] rounded flex items-center justify-center flex-shrink-0">
-                  <Target className="w-4 h-4 text-[#0A0A0C]" />
-                </div>
-                <div>
-                  <div className="font-semibold text-[#A5D8FF]">Smooth</div>
-                  <div className="text-[#E2E2D0]/70">Uses Quadratic Bezier curves for smooth ink</div>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-8 bg-[#A5D8FF] rounded flex items-center justify-center flex-shrink-0">
-                  <Pencil className="w-4 h-4 text-[#0A0A0C]" />
-                </div>
-                <div>
-                  <div className="font-semibold text-[#A5D8FF]">Pencil</div>
-                  <div className="text-[#E2E2D0]/70">Textured, slightly rough edges</div>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-8 bg-[#A5D8FF] rounded flex items-center justify-center flex-shrink-0">
-                  <Activity className="w-4 h-4 text-[#0A0A0C]" />
-                </div>
-                <div>
-                  <div className="font-semibold text-[#A5D8FF]">Marker</div>
-                  <div className="text-[#E2E2D0]/70">Bold, slightly transparent, flat edges</div>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-8 bg-[#A5D8FF] rounded flex items-center justify-center flex-shrink-0">
-                  <Zap className="w-4 h-4 text-[#0A0A0C]" />
-                </div>
-                <div>
-                  <div className="font-semibold text-[#A5D8FF]">Spray</div>
-                  <div className="text-[#E2E2D0]/70">Particle-based spray paint effect</div>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-8 bg-[#A5D8FF] rounded flex items-center justify-center flex-shrink-0">
-                  <Shield className="w-4 h-4 text-[#0A0A0C]" />
-                </div>
-                <div>
-                  <div className="font-semibold text-[#A5D8FF]">Calligraphy</div>
-                  <div className="text-[#E2E2D0]/70">Variable width with angle sensitivity</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-8 text-center">
-              <div className="text-[#A5D8FF] text-xl font-bold mb-4">BRUSH PREVIEW</div>
-              <div className="text-[#72A0C1] mb-6">VARIOUS BRUSH TYPES</div>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div className="text-[#E2E2D0]/70">Watercolor</div>
-                <div className="text-[#E2E2D0]/70">Oil</div>
-                <div className="text-[#E2E2D0]/70">Ink Pen</div>
-                <div className="text-[#E2E2D0]/70">Airbrush</div>
-                <div className="text-[#E2E2D0]/70">Charcoal</div>
-                <div className="text-[#E2E2D0]/70">Digital</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Canvas Styles Section */}
-      <section className="py-20 px-6 bg-[#0A0A0C]/50" id="canvas">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Multiple Background Styles</h2>
-            <p className="text-xl text-[#E2E2D0]/70">Choose your creative environment</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 text-center hover:bg-[#72A0C1]/10 transition-colors">
-              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Maximize2 className="w-6 h-6 text-[#0A0A0C]" />
-              </div>
-              <h3 className="text-lg font-semibold">Plain</h3>
-            </div>
-
-            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 text-center hover:bg-[#72A0C1]/10 transition-colors">
-              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Grid3X3 className="w-6 h-6 text-[#0A0A0C]" />
-              </div>
-              <h3 className="text-lg font-semibold">Dotted</h3>
-            </div>
-
-            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 text-center hover:bg-[#72A0C1]/10 transition-colors">
-              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Activity className="w-6 h-6 text-[#0A0A0C]" />
-              </div>
-              <h3 className="text-lg font-semibold">Sketch</h3>
-            </div>
-
-            <div className="bg-[#72A0C1]/5 border border-[#72A0C1]/20 rounded-xl p-6 text-center hover:bg-[#72A0C1]/10 transition-colors">
-              <div className="w-12 h-12 bg-[#A5D8FF] rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Cpu className="w-6 h-6 text-[#0A0A0C]" />
-              </div>
-              <h3 className="text-lg font-semibold">Notes</h3>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Ready to Sketch?</h2>
-          <p className="text-xl text-[#E2E2D0]/70 mb-8">No sign-up required. Optimized for Android tablets. Just open and start creating.</p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={onEnterApp}
-              className="bg-[#A5D8FF] text-[#0A0A0C] px-8 py-4 rounded-xl font-semibold hover:bg-[#A5D8FF]/90 transition-colors flex items-center justify-center gap-2"
-            >
-              Launch X-Sketch Pro
-              <ArrowRight className="w-5 h-5" />
-            </button>
-            <a
-              href="https://github.com/me-yeatz/X-Sketch"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border border-[#72A0C1]/50 text-[#A5D8FF] px-8 py-4 rounded-xl font-semibold hover:bg-[#72A0C1]/10 transition-colors flex items-center justify-center gap-2"
-            >
-              View Source
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-12 px-6 border-t border-[#72A0C1]/20">
-        <div className="max-w-6xl mx-auto text-center">
-          <p className="text-[#E2E2D0]/60">
-            X-Sketch Pro by <a href="https://github.com/me-yeatz" className="text-[#A5D8FF] hover:text-[#A5D8FF]/80">@me-yeatz</a> | <a href="https://github.com/me-yeatz/X-Sketch" className="text-[#A5D8FF] hover:text-[#A5D8FF]/80">Open Source</a>
-          </p>
-        </div>
-      </footer>
     </div>
   );
 };

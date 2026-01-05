@@ -1,121 +1,1062 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>X-SKETCH // CYBER DRIVE OS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="X-SKETCH - Professional tablet sketching application optimized for Android tablets">
+    <title>X-SKETCH PRO // Professional Tablet Sketching</title>
 
-    <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/icon.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/icon.png">
+    <!-- Icons -->
+    <link rel="icon" type="image/png" href="/icon.png">
     <link rel="apple-touch-icon" href="/icon.png">
     <link rel="manifest" href="/manifest.json">
 
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=VT323&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Roboto+Mono:wght@400;700&family=VT323&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --cyber-dark: #0A0A0C;
-            --cyber-blue: #72A0C1;
-            --cyber-cyan: #A5D8FF;
-            --cyber-cream: #E2E2D0;
-            --cyber-red: #EF4444;
-        }
-        body, html {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            height: 100%;
-            width: 100%;
-            background-color: var(--cyber-dark);
+        }
+
+        :root {
+            --black: #0A0A0C;
+            --white: #E2E2D0;
+            --blue: #72A0C1;
+            --cyan: #A5D8FF;
+            --red: #EF4444;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--black);
+            border-bottom: 3px solid var(--blue);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-logo {
+            width: 40px;
+            height: 40px;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-title {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-subtitle {
+            font-size: 10px;
+            font-weight: 900;
+            color: var(--cyan);
+            margin-left: 4px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid transparent;
+            padding: 6px 12px;
+        }
+
+        .nav-link:hover {
+            color: var(--cyan);
+            border-color: var(--cyan);
+            background: rgba(165, 216, 255, 0.1);
+        }
+
+        .nav-cta {
+            background: var(--blue);
+            color: var(--black);
+            border: 3px solid var(--cyan);
+            padding: 10px 20px;
+            font-weight: 900;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 4px 4px 0 var(--cyan);
+        }
+
+        .nav-cta:hover {
+            background: var(--cyan);
+            color: var(--black);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--blue);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+            padding: 140px 64px 80px;
+            max-width: 1600px;
+            margin: 0 auto;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--black);
+            color: var(--cyan);
+            padding: 10px 18px;
+            border: 2px solid var(--cyan);
+            width: fit-content;
+            font-weight: 900;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-title {
+            font-size: 80px;
+            font-weight: 900;
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: -4px;
+            color: var(--white);
+        }
+
+        .hero-highlight {
+            color: var(--cyan);
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--white);
+            opacity: 0.8;
+            max-width: 560px;
             font-family: 'Inter', sans-serif;
-            color: var(--cyber-cream);
         }
 
-        /* Allow scrolling on landing page, prevent on drawing app */
-        body.landing-page {
-            overflow: auto;
-            touch-action: auto;
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            margin-top: 8px;
         }
 
-        body.drawing-app {
-            overflow: hidden;
-            touch-action: none;
+        .btn-primary {
+            background: var(--cyan);
+            color: var(--black);
+            border: 3px solid var(--blue);
+            padding: 16px 32px;
+            font-weight: 900;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 6px 6px 0 var(--blue);
         }
-        #root {
-            height: 100%;
+
+        .btn-primary:hover {
+            background: var(--blue);
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0 var(--cyan);
+        }
+
+        .btn-secondary {
+            background: var(--black);
+            color: var(--cyan);
+            border: 3px solid var(--blue);
+            padding: 16px 32px;
+            font-weight: 900;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 6px 6px 0 var(--blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--cyan);
+            color: var(--black);
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0 var(--blue);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 16px;
+            padding-top: 24px;
+            border-top: 2px solid var(--blue);
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--cyan);
+            text-transform: uppercase;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            font-weight: 900;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.6;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-demo {
+            background: var(--black);
+            border: 3px solid var(--cyan);
+            box-shadow: 16px 16px 0 var(--blue);
             width: 100%;
+            max-width: 540px;
         }
-        canvas {
-            touch-action: none;
-            image-rendering: pixelated;
+
+        .demo-header {
+            background: var(--blue);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 3px solid var(--cyan);
         }
-        .pixel-font {
-            font-family: 'VT323', monospace;
+
+        .demo-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid var(--black);
+            background: var(--cyan);
         }
-        .mono-font {
-            font-family: 'Roboto Mono', monospace;
+
+        .demo-dot:nth-child(2) {
+            border-color: var(--black);
+            background: var(--white);
         }
-        .cyber-border {
-            border: 2px solid var(--cyber-blue);
-            box-shadow: 2px 2px 0px var(--cyber-dark), 4px 4px 0px var(--cyber-blue);
+
+        .demo-dot:nth-child(3) {
+            border-color: var(--black);
+            background: var(--red);
         }
-        .cyber-border-thin {
-            border: 1px solid var(--cyber-blue);
+
+        .demo-title {
+            color: var(--black);
+            font-size: 11px;
+            font-weight: 900;
+            margin-left: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .dither-bg {
-            background-image: radial-gradient(var(--cyber-blue) 0.5px, transparent 0.5px);
-            background-size: 3px 3px;
+
+        .demo-content {
+            padding: 20px;
         }
-        .zebra-bg {
-            background: repeating-linear-gradient(
-                45deg,
-                var(--cyber-blue),
-                var(--cyber-blue) 5px,
-                var(--cyber-dark) 5px,
-                var(--cyber-dark) 10px
-            );
+
+        .demo-toolbar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
         }
-        .scanlines {
+
+        .tool-btn {
+            background: var(--black);
+            border: 2px solid var(--blue);
+            color: var(--white);
+            padding: 8px 16px;
+            font-size: 11px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tool-btn.active {
+            background: var(--cyan);
+            color: var(--black);
+            border-color: var(--cyan);
+        }
+
+        .demo-canvas {
+            background: #0D0D10;
+            border: 2px solid var(--blue);
+            height: 280px;
             position: relative;
             overflow: hidden;
         }
-        .scanlines::after {
-            content: " ";
-            display: block;
+
+        .canvas-grid {
             position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-            z-index: 100;
-            background-size: 100% 4px, 3px 100%;
-            pointer-events: none;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(114, 160, 193, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(114, 160, 193, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
         }
-        .crt-flicker {
-            animation: flicker 0.15s infinite;
+
+        .demo-stroke {
+            position: absolute;
+            border: 3px solid var(--cyan);
+            border-radius: 50%;
+            opacity: 0.8;
         }
-        @keyframes flicker {
-            0% { opacity: 0.98; }
-            50% { opacity: 1; }
-            100% { opacity: 0.99; }
+
+        .demo-stroke-1 {
+            width: 200px;
+            height: 80px;
+            top: 60px;
+            left: 60px;
+            transform: rotate(-15deg);
         }
-        /* Custom scrollbar for cyber look */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
+
+        .demo-stroke-2 {
+            width: 180px;
+            height: 60px;
+            top: 120px;
+            left: 200px;
+            transform: rotate(10deg);
+            border-color: var(--blue);
         }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: var(--cyber-dark);
+
+        .demo-stroke-3 {
+            width: 150px;
+            height: 50px;
+            top: 180px;
+            left: 100px;
+            transform: rotate(-5deg);
+            border-color: var(--white);
         }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: var(--cyber-blue);
+
+        .demo-footer {
+            background: var(--black);
+            border: 2px solid var(--blue);
+            padding: 10px 16px;
+            margin-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            color: var(--cyan);
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Features */
+        .features {
+            padding: 100px 64px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--black);
+            color: var(--cyan);
+            border: 2px solid var(--cyan);
+            padding: 8px 16px;
+            font-weight: 900;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin: 0 0 16px 0;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--white);
+            opacity: 0.7;
+            margin: 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--black);
+            border: 3px solid var(--blue);
+            padding: 32px;
+            transition: all 0.2s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--cyan);
+            transform: translate(-4px, -4px);
+            box-shadow: 8px 8px 0 var(--cyan);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 0 12px 0;
+        }
+
+        .feature-description {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--white);
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        /* Showcase */
+        .showcase {
+            padding: 120px 64px;
+            background: var(--cyan);
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .showcase-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .showcase-badge {
+            display: inline-block;
+            background: var(--black);
+            color: var(--cyan);
+            border: 2px solid var(--cyan);
+            padding: 10px 20px;
+            font-weight: 900;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+        }
+
+        .showcase-title {
+            font-size: 56px;
+            font-weight: 900;
+            color: var(--black);
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin: 0 0 24px 0;
+        }
+
+        .showcase-subtitle {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--black);
+            opacity: 0.8;
+            margin: 0 0 40px 0;
+            max-width: 680px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .showcase-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 48px;
+        }
+
+        .showcase-btn {
+            background: var(--blue);
+            color: var(--white);
+            border: 4px solid var(--black);
+            padding: 20px 40px;
+            font-weight: 900;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            box-shadow: 8px 8px 0 var(--black);
+        }
+
+        .showcase-btn:hover {
+            background: var(--cyan);
+            transform: translate(-3px, -3px);
+            box-shadow: 12px 12px 0 var(--black);
+        }
+
+        .showcase-btn-secondary {
+            background: var(--white);
+            color: var(--black);
+            border: 4px solid var(--black);
+            padding: 20px 40px;
+            font-weight: 900;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            box-shadow: 8px 8px 0 var(--black);
+        }
+
+        .showcase-btn-secondary:hover {
+            background: var(--cyan);
+            transform: translate(-3px, -3px);
+            box-shadow: 12px 12px 0 var(--black);
+        }
+
+        .showcase-features {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .showcase-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .showcase-item-icon {
+            font-size: 36px;
+        }
+
+        .showcase-item-text {
+            font-size: 12px;
+            font-weight: 900;
+            color: var(--black);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--black);
+            border-top: 3px solid var(--blue);
+            padding: 48px 64px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .footer-brand {
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        .footer-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 4px;
+        }
+
+        .footer-tagline {
+            font-size: 11px;
+            font-weight: 900;
+            color: var(--cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-link {
+            background: #0D0D10;
+            border: 2px solid var(--blue);
+            padding: 10px 24px;
+            font-size: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+        }
+
+        .footer-link:hover {
+            border-color: var(--cyan);
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0 var(--cyan);
+        }
+
+        .footer-meta {
+            text-align: center;
+        }
+
+        .footer-line {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--white);
+            opacity: 0.7;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-highlight {
+            color: var(--cyan);
+            font-weight: 900;
+        }
+
+        .footer-copyright {
+            font-size: 11px;
+            color: var(--white);
+            opacity: 0.5;
+        }
+
+        .footer-copyright a {
+            color: var(--cyan);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-copyright a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 120px 32px 48px;
+                gap: 48px;
+            }
+
+            .hero-title {
+                font-size: 56px;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                padding: 12px 16px;
+            }
+
+            .nav-links {
+                gap: 8px;
+            }
+
+            .nav-link {
+                display: none;
+            }
+
+            .nav-cta {
+                padding: 8px 16px;
+                font-size: 10px;
+            }
+
+            .nav-title {
+                font-size: 16px;
+            }
+
+            .nav-subtitle {
+                font-size: 9px;
+            }
+
+            .hero {
+                padding: 120px 20px 48px;
+            }
+
+            .hero-title {
+                font-size: 42px;
+                letter-spacing: -2px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 24px;
+            }
+
+            .stat-value {
+                font-size: 24px;
+            }
+
+            .features {
+                padding: 64px 20px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 24px;
+            }
+
+            .feature-icon {
+                font-size: 40px;
+            }
+
+            .showcase {
+                padding: 80px 20px;
+            }
+
+            .showcase-title {
+                font-size: 36px;
+            }
+
+            .showcase-subtitle {
+                font-size: 16px;
+            }
+
+            .showcase-buttons {
+                flex-direction: column;
+            }
+
+            .showcase-btn,
+            .showcase-btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+
+            .showcase-features {
+                gap: 24px;
+            }
+
+            .footer {
+                padding: 32px 20px;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                width: 100%;
+                gap: 12px;
+            }
+
+            .footer-link {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
-
 </head>
-<body class="scanlines">
-    <div id="root"></div>
-<script type="module" src="/index.tsx"></script>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-brand">
+            <div class="nav-logo">✏️</div>
+            <span class="nav-title">X-SKETCH</span>
+            <span class="nav-subtitle">PRO</span>
+        </div>
+        <div class="nav-links">
+            <a href="#features" class="nav-link">FEATURES</a>
+            <a href="#brushes" class="nav-link">BRUSHES</a>
+            <a href="https://github.com/me-yeatz/X-Sketch" target="_blank" class="nav-link">GITHUB</a>
+            <a href="/app" class="nav-cta">LAUNCH_APP</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span>⚡</span>
+                <span>ADVANCED_SKETCHING_SYSTEM</span>
+            </div>
+            <h1 class="hero-title">
+                X-SKETCH <span class="hero-highlight">PRO</span>
+            </h1>
+            <p class="hero-subtitle">
+                Professional-grade sketching application optimized for Android tablets.
+                Featuring multi-layer palm rejection, low-latency ink rendering, and a robust brush engine.
+            </p>
+            <div class="hero-buttons">
+                <a href="/app" class="btn-primary">LAUNCH_X-SKETCH</a>
+                <a href="https://github.com/me-yeatz/X-Sketch" target="_blank" class="btn-secondary">VIEW_SOURCE</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-value">10+</div>
+                    <div class="stat-label">BRUSH_TYPES</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">4ms</div>
+                    <div class="stat-label">LATENCY</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">99.8%</div>
+                    <div class="stat-label">STABILITY</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-demo">
+                <div class="demo-header">
+                    <div class="demo-dot"></div>
+                    <div class="demo-dot"></div>
+                    <div class="demo-dot"></div>
+                    <span class="demo-title">CYBER_DRIVE_OS // TERMINAL</span>
+                </div>
+                <div class="demo-content">
+                    <div class="demo-toolbar">
+                        <div class="tool-btn active">PEN</div>
+                        <div class="tool-btn">BRUSH</div>
+                        <div class="tool-btn">ERASER</div>
+                    </div>
+                    <div class="demo-canvas">
+                        <div class="canvas-grid"></div>
+                        <div class="demo-stroke demo-stroke-1"></div>
+                        <div class="demo-stroke demo-stroke-2"></div>
+                        <div class="demo-stroke demo-stroke-3"></div>
+                    </div>
+                    <div class="demo-footer">
+                        <span class="footer-text">STATUS: RUN // LATENCY: 4ms</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="features-header">
+            <div class="section-badge">⚡ SYSTEM_CAPABILITIES</div>
+            <h2 class="section-title">EVERYTHING YOU NEED</h2>
+            <p class="section-subtitle">Advanced tools for professional digital sketching</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🖌️</div>
+                <h3 class="feature-title">10 BRUSH TYPES</h3>
+                <p class="feature-description">
+                    From smooth ink to watercolor, oil, airbrush and more. Each brush responds to pressure and movement for professional results.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">✋</div>
+                <h3 class="feature-title">PALM REJECTION</h3>
+                <p class="feature-description">
+                    Advanced palm rejection engine optimized for Android tablets. Prevents accidental touches during sketching sessions.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3 class="feature-title">LAYER SUPPORT</h3>
+                <p class="feature-description">
+                    Multi-layer canvas with opacity controls. Organize your artwork with dedicated layer management for complex compositions.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3 class="feature-title">COLOR SYSTEM</h3>
+                <p class="feature-description">
+                    Full color palette with opacity controls. Cyber-themed color options optimized for digital art and design work.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💾</div>
+                <h3 class="feature-title">EXPORT OPTIONS</h3>
+                <p class="feature-description">
+                    Export to PNG, JPG, SVG, and PDF formats. High-quality output for all your creative needs and professional use cases.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3 class="feature-title">TABLET OPTIMIZED</h3>
+                <p class="feature-description">
+                    Designed specifically for Android tablets like the Infinix XPad. Full stylus and touch support with low-latency rendering.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showcase Section -->
+    <section class="showcase" id="brushes">
+        <div class="showcase-content">
+            <div class="showcase-badge">⚡ READY_TO_SKETCH</div>
+            <h2 class="showcase-title">LAUNCH X-SKETCH PRO NOW</h2>
+            <p class="showcase-subtitle">
+                No sign-up required. Optimized for Android tablets. Just open and start creating professional artwork.
+            </p>
+
+            <div class="showcase-buttons">
+                <a href="/app" class="showcase-btn">LAUNCH_X-SKETCH_PRO</a>
+                <a href="https://github.com/me-yeatz/X-Sketch" target="_blank" class="showcase-btn-secondary">VIEW_ON_GITHUB</a>
+            </div>
+
+            <div class="showcase-features">
+                <div class="showcase-item">
+                    <span class="showcase-item-icon">⚡</span>
+                    <span class="showcase-item-text">INSTANT_LOAD</span>
+                </div>
+                <div class="showcase-item">
+                    <span class="showcase-item-icon">📱</span>
+                    <span class="showcase-item-text">TABLET_READY</span>
+                </div>
+                <div class="showcase-item">
+                    <span class="showcase-item-icon">🎨</span>
+                    <span class="showcase-item-text">PRO_TOOLS</span>
+                </div>
+                <div class="showcase-item">
+                    <span class="showcase-item-icon">💾</span>
+                    <span class="showcase-item-text">OFFLINE_READY</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">✏️</div>
+                <div class="footer-title">X-SKETCH PRO</div>
+                <div class="footer-tagline">CYBER_DRIVE_SKETCHING_SYSTEM</div>
+            </div>
+
+            <div class="footer-links">
+                <a href="https://github.com/me-yeatz/X-Sketch" target="_blank" class="footer-link">
+                    <span>GITHUB</span>
+                </a>
+                <a href="https://vercel.com/yeatz" target="_blank" class="footer-link">
+                    <span>VERCEL</span>
+                </a>
+                <a href="/app" class="footer-link">
+                    <span>LAUNCH_APP</span>
+                </a>
+            </div>
+
+            <div class="footer-meta">
+                <div class="footer-line">
+                    <span>BUILT_WITH</span>
+                    <span class="footer-highlight">REACT</span>
+                    <span>+</span>
+                    <span class="footer-highlight">VITE</span>
+                    <span>+</span>
+                    <span class="footer-highlight">CAPACITOR</span>
+                </div>
+                <div class="footer-copyright">
+                    © 2025 <a href="https://github.com/me-yeatz" target="_blank">@me-yeatz</a> // OPEN_SOURCE
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
