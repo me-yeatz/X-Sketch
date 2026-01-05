@@ -41,6 +41,7 @@ import {
 } from './types';
 import { PalmRejectionEngine } from './services/PalmRejectionEngine';
 import { BrushEngine } from './services/BrushEngine';
+import LandingPage from './components/LandingPage';
 
 const App: React.FC = () => {
   // --- State ---
@@ -324,14 +325,14 @@ const App: React.FC = () => {
       {showLandingPage ? (
         <LandingPage onEnterApp={() => setShowLandingPage(false)} />
       ) : (
-        <div className="relative w-full h-full bg-[#0A0A0C] flex flex-col overflow-hidden font-sans select-none text-[#E2E2D0] crt-flicker">
+        <div className="relative w-full h-full bg-white flex flex-col overflow-hidden font-sans select-none text-black">
 
           {/* Header HUD */}
-          <header className="h-16 bg-[#0A0A0C] border-b-2 border-[#72A0C1] flex items-center justify-between px-6 z-50">
+          <header className="h-16 bg-white border-b-2 border-gray-200 flex items-center justify-between px-6 z-50">
             <div className="flex items-center gap-8">
               <div className="flex flex-col">
-                 <span className="pixel-font text-3xl leading-none tracking-widest text-[#A5D8FF]">CYBER DRIVE</span>
-                 <span className="mono-font text-[9px] opacity-60 tracking-[0.3em]">RE-SKETCH_KERNEL.v3.1</span>
+                <span className="font-bold text-3xl leading-none tracking-wide text-blue-600">SketchPad</span>
+                <span className="text-xs opacity-60 tracking-wide">Professional Drawing Tool</span>
               </div>
               <div className="hidden md:flex gap-4 items-center">
                  <div className="h-8 w-[2px] bg-[#72A0C1]/30"></div>
