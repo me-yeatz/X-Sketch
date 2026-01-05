@@ -13,15 +13,7 @@ export default defineConfig(({ mode }) => {
       build: {
         rollupOptions: {
           input: {
-            app: path.resolve(__dirname, 'index.tsx'),
-          },
-          output: {
-            entryFileNames: (chunkInfo) => {
-              if (chunkInfo.name === 'app') {
-                return 'app.html';
-              }
-              return chunkInfo.name;
-            },
+            app: path.resolve(__dirname, 'app.html'),
           },
         },
       },
