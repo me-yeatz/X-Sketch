@@ -206,104 +206,158 @@ const AppClean: React.FC = () => {
   };
 
   return (
-    <div className="h-screen bg-white flex flex-col">
-      {/* Toolbar */}
-      <div className="bg-gray-100 border-b border-gray-300 p-4 flex items-center gap-4 flex-wrap">
-        {/* Tools */}
-        <div className="flex gap-2">
-          <button
-            onClick={() => setActiveTool('pen')}
-            className={`p-2 rounded ${activeTool === 'pen' ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200'}`}
-          >
-            <Pencil size={20} />
-          </button>
-          <button
-            onClick={() => setActiveTool('eraser')}
-            className={`p-2 rounded ${activeTool === 'eraser' ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200'}`}
-          >
-            <Eraser size={20} />
-          </button>
-          <button
-            onClick={() => setActiveTool('pan')}
-            className={`p-2 rounded ${activeTool === 'pan' ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200'}`}
-          >
-            <Move size={20} />
-          </button>
+    <div className="h-screen bg-gray-50 flex">
+      {/* Sidebar */}
+      <div className="w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm">
+        {/* Header */}
+        <div className="p-4 border-b border-gray-200">
+          <h1 className="text-xl font-semibold text-gray-900">SketchPad</h1>
+          <p className="text-sm text-gray-600">Professional Drawing Tool</p>
+        </div>
+
+        {/* Tools Section */}
+        <div className="p-4 border-b border-gray-200">
+          <h3 className="text-sm font-medium text-gray-900 mb-3">Tools</h3>
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              onClick={() => setActiveTool('pen')}
+              className={`p-3 rounded-lg border-2 transition-all ${
+                activeTool === 'pen'
+                  ? 'bg-blue-50 border-blue-500 text-blue-600'
+                  : 'bg-white border-gray-200 hover:border-gray-300'
+              }`}
+            >
+              <Pencil size={20} className="mx-auto mb-1" />
+              <span className="text-xs">Pen</span>
+            </button>
+            <button
+              onClick={() => setActiveTool('eraser')}
+              className={`p-3 rounded-lg border-2 transition-all ${
+                activeTool === 'eraser'
+                  ? 'bg-blue-50 border-blue-500 text-blue-600'
+                  : 'bg-white border-gray-200 hover:border-gray-300'
+              }`}
+            >
+              <Eraser size={20} className="mx-auto mb-1" />
+              <span className="text-xs">Eraser</span>
+            </button>
+            <button
+              onClick={() => setActiveTool('pan')}
+              className={`p-3 rounded-lg border-2 transition-all ${
+                activeTool === 'pan'
+                  ? 'bg-blue-50 border-blue-500 text-blue-600'
+                  : 'bg-white border-gray-200 hover:border-gray-300'
+              }`}
+            >
+              <Move size={20} className="mx-auto mb-1" />
+              <span className="text-xs">Pan</span>
+            </button>
+          </div>
         </div>
 
         {/* Paper Types */}
-        <div className="flex gap-2">
-          <button
-            onClick={() => setPaperType('plain')}
-            className={`p-2 rounded ${paperType === 'plain' ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200'}`}
-          >
-            <Minus size={20} />
-          </button>
-          <button
-            onClick={() => setPaperType('lined')}
-            className={`p-2 rounded ${paperType === 'lined' ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200'}`}
-          >
-            <FileText size={20} />
-          </button>
-          <button
-            onClick={() => setPaperType('dotted')}
-            className={`p-2 rounded ${paperType === 'dotted' ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200'}`}
-          >
-            <Circle size={20} />
-          </button>
-          <button
-            onClick={() => setPaperType('grid')}
-            className={`p-2 rounded ${paperType === 'grid' ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200'}`}
-          >
-            <Grid size={20} />
-          </button>
+        <div className="p-4 border-b border-gray-200">
+          <h3 className="text-sm font-medium text-gray-900 mb-3">Paper</h3>
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              onClick={() => setPaperType('plain')}
+              className={`p-3 rounded-lg border-2 transition-all ${
+                paperType === 'plain'
+                  ? 'bg-blue-50 border-blue-500 text-blue-600'
+                  : 'bg-white border-gray-200 hover:border-gray-300'
+              }`}
+            >
+              <Minus size={20} className="mx-auto mb-1" />
+              <span className="text-xs">Plain</span>
+            </button>
+            <button
+              onClick={() => setPaperType('lined')}
+              className={`p-3 rounded-lg border-2 transition-all ${
+                paperType === 'lined'
+                  ? 'bg-blue-50 border-blue-500 text-blue-600'
+                  : 'bg-white border-gray-200 hover:border-gray-300'
+              }`}
+            >
+              <FileText size={20} className="mx-auto mb-1" />
+              <span className="text-xs">Lined</span>
+            </button>
+            <button
+              onClick={() => setPaperType('dotted')}
+              className={`p-3 rounded-lg border-2 transition-all ${
+                paperType === 'dotted'
+                  ? 'bg-blue-50 border-blue-500 text-blue-600'
+                  : 'bg-white border-gray-200 hover:border-gray-300'
+              }`}
+            >
+              <Circle size={20} className="mx-auto mb-1" />
+              <span className="text-xs">Dotted</span>
+            </button>
+            <button
+              onClick={() => setPaperType('grid')}
+              className={`p-3 rounded-lg border-2 transition-all ${
+                paperType === 'grid'
+                  ? 'bg-blue-50 border-blue-500 text-blue-600'
+                  : 'bg-white border-gray-200 hover:border-gray-300'
+              }`}
+            >
+              <Grid size={20} className="mx-auto mb-1" />
+              <span className="text-xs">Grid</span>
+            </button>
+          </div>
         </div>
 
-        {/* Color and Size */}
-        <div className="flex items-center gap-2">
-          <Palette size={16} />
-          <input
-            type="color"
-            value={color}
-            onChange={(e) => setColor(e.target.value)}
-            className="w-8 h-8 border border-gray-300 rounded"
-          />
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="text-sm">Size:</span>
-          <input
-            type="range"
-            min="1"
-            max="20"
-            value={brushSize}
-            onChange={(e) => setBrushSize(Number(e.target.value))}
-            className="w-20"
-          />
-          <span className="text-sm">{brushSize}px</span>
+        {/* Brush Settings */}
+        <div className="p-4 border-b border-gray-200">
+          <h3 className="text-sm font-medium text-gray-900 mb-3">Brush</h3>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-xs text-gray-600 mb-1">Color</label>
+              <input
+                type="color"
+                value={color}
+                onChange={(e) => setColor(e.target.value)}
+                className="w-full h-8 border border-gray-300 rounded"
+              />
+            </div>
+            <div>
+              <label className="block text-xs text-gray-600 mb-1">Size: {brushSize}px</label>
+              <input
+                type="range"
+                min="1"
+                max="50"
+                value={brushSize}
+                onChange={(e) => setBrushSize(Number(e.target.value))}
+                className="w-full"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Actions */}
-        <div className="ml-auto flex gap-2">
-          <button onClick={undo} className="p-2 bg-white hover:bg-gray-200 rounded">
-            <Undo size={20} />
-          </button>
-          <button onClick={clearCanvas} className="p-2 bg-white hover:bg-gray-200 rounded">
-            <RotateCcw size={20} />
+        <div className="p-4 mt-auto">
+          <div className="grid grid-cols-2 gap-2">
+            <button onClick={undo} className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors">
+              <Undo size={16} className="mx-auto" />
+            </button>
+            <button onClick={clearCanvas} className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors">
+              <RotateCcw size={16} className="mx-auto" />
+            </button>
+          </div>
+          <button className="w-full mt-2 p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            <Download size={16} className="inline mr-1" />
+            Export
           </button>
         </div>
       </div>
-      {/* Canvas */}
-      <div className="flex-1 bg-white relative">
+
+      {/* Canvas Area */}
+      <div className="flex-1 bg-white relative overflow-hidden">
         <canvas
           ref={backgroundCanvasRef}
-          width={window.innerWidth}
-          height={window.innerHeight - 80}
           className="absolute inset-0"
         />
         <canvas
           ref={canvasRef}
-          width={window.innerWidth}
-          height={window.innerHeight - 80}
           className="absolute inset-0 cursor-crosshair"
           onPointerDown={handleMouseDown}
           onPointerMove={handleMouseMove}
