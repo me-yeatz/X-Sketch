@@ -12,7 +12,9 @@ import {
   FileText,
   Grid,
   Circle,
-  Minus
+  Minus,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { PalmRejectionEngine } from './services/PalmRejectionEngine';
 import { PalmRejectionLevel } from './types';
@@ -26,6 +28,7 @@ const AppClean: React.FC = () => {
   const [strokes, setStrokes] = useState<any[]>([]);
   const [paperType, setPaperType] = useState<PaperType>('plain');
   const [panOffset, setPanOffset] = useState({ x: 0, y: 0 });
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const backgroundCanvasRef = useRef<HTMLCanvasElement>(null);
   const isDrawing = useRef(false);
@@ -208,119 +211,234 @@ const AppClean: React.FC = () => {
   return (
     <div className="h-screen bg-gray-50 flex">
       {/* Sidebar */}
-      <div className="w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm">
+      <div className={`bg-white border-r border-gray-200 flex flex-col shadow-sm transition-all duration-300 ${
+        sidebarOpen ? 'w-64' : 'w-16'
+      }`}>
         {/* Header */}
         <div className="p-4 border-b border-gray-200">
-          <h1 className="text-xl font-semibold text-gray-900">SketchPad</h1>
-          <p className="text-sm text-gray-600">Professional Drawing Tool</p>
+          {sidebarOpen ? (
+            <>
+              <h1 className="text-xl font-semibold text-gray-900">SketchPad</h1>
+              <p className="text-sm text-gray-600">Professional Drawing Tool</p>
+            </>
+          ) : (
+            <div className="flex justify-center">
+              <Pencil size={24} className="text-gray-600" />
+            </div>
+          )}
         </div>
 
         {/* Tools Section */}
         <div className="p-4 border-b border-gray-200">
-          <h3 className="text-sm font-medium text-gray-900 mb-3">Tools</h3>
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              onClick={() => setActiveTool('pen')}
-              className={`p-3 rounded-lg border-2 transition-all ${
-                activeTool === 'pen'
-                  ? 'bg-blue-50 border-blue-500 text-blue-600'
-                  : 'bg-white border-gray-200 hover:border-gray-300'
-              }`}
-            >
-              <Pencil size={20} className="mx-auto mb-1" />
-              <span className="text-xs">Pen</span>
-            </button>
-            <button
-              onClick={() => setActiveTool('eraser')}
-              className={`p-3 rounded-lg border-2 transition-all ${
-                activeTool === 'eraser'
-                  ? 'bg-blue-50 border-blue-500 text-blue-600'
-                  : 'bg-white border-gray-200 hover:border-gray-300'
-              }`}
-            >
-              <Eraser size={20} className="mx-auto mb-1" />
-              <span className="text-xs">Eraser</span>
-            </button>
-            <button
-              onClick={() => setActiveTool('pan')}
-              className={`p-3 rounded-lg border-2 transition-all ${
-                activeTool === 'pan'
-                  ? 'bg-blue-50 border-blue-500 text-blue-600'
-                  : 'bg-white border-gray-200 hover:border-gray-300'
-              }`}
-            >
-              <Move size={20} className="mx-auto mb-1" />
-              <span className="text-xs">Pan</span>
-            </button>
-          </div>
+          {sidebarOpen ? (
+            <>
+              <h3 className="text-sm font-medium text-gray-900 mb-3">Tools</h3>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={() => setActiveTool('pen')}
+                  className={`p-3 rounded-lg border-2 transition-all ${
+                    activeTool === 'pen'
+                      ? 'bg-blue-50 border-blue-500 text-blue-600'
+                      : 'bg-white border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <Pencil size={20} className="mx-auto mb-1" />
+                  <span className="text-xs">Pen</span>
+                </button>
+                <button
+                  onClick={() => setActiveTool('eraser')}
+                  className={`p-3 rounded-lg border-2 transition-all ${
+                    activeTool === 'eraser'
+                      ? 'bg-blue-50 border-blue-500 text-blue-600'
+                      : 'bg-white border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <Eraser size={20} className="mx-auto mb-1" />
+                  <span className="text-xs">Eraser</span>
+                </button>
+                <button
+                  onClick={() => setActiveTool('pan')}
+                  className={`p-3 rounded-lg border-2 transition-all ${
+                    activeTool === 'pan'
+                      ? 'bg-blue-50 border-blue-500 text-blue-600'
+                      : 'bg-white border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <Move size={20} className="mx-auto mb-1" />
+                  <span className="text-xs">Pan</span>
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="space-y-2">
+              <button
+                onClick={() => setActiveTool('pen')}
+                className={`w-full p-2 rounded-lg border-2 transition-all ${
+                  activeTool === 'pen'
+                    ? 'bg-blue-50 border-blue-500 text-blue-600'
+                    : 'bg-white border-gray-200 hover:border-gray-300'
+                }`}
+              >
+                <Pencil size={16} className="mx-auto" />
+              </button>
+              <button
+                onClick={() => setActiveTool('eraser')}
+                className={`w-full p-2 rounded-lg border-2 transition-all ${
+                  activeTool === 'eraser'
+                    ? 'bg-blue-50 border-blue-500 text-blue-600'
+                    : 'bg-white border-gray-200 hover:border-gray-300'
+                }`}
+              >
+                <Eraser size={16} className="mx-auto" />
+              </button>
+              <button
+                onClick={() => setActiveTool('pan')}
+                className={`w-full p-2 rounded-lg border-2 transition-all ${
+                  activeTool === 'pan'
+                    ? 'bg-blue-50 border-blue-500 text-blue-600'
+                    : 'bg-white border-gray-200 hover:border-gray-300'
+                }`}
+              >
+                <Move size={16} className="mx-auto" />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Paper Types */}
         <div className="p-4 border-b border-gray-200">
-          <h3 className="text-sm font-medium text-gray-900 mb-3">Paper</h3>
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              onClick={() => setPaperType('plain')}
-              className={`p-3 rounded-lg border-2 transition-all ${
-                paperType === 'plain'
-                  ? 'bg-blue-50 border-blue-500 text-blue-600'
-                  : 'bg-white border-gray-200 hover:border-gray-300'
-              }`}
-            >
-              <Minus size={20} className="mx-auto mb-1" />
-              <span className="text-xs">Plain</span>
-            </button>
-            <button
-              onClick={() => setPaperType('lined')}
-              className={`p-3 rounded-lg border-2 transition-all ${
-                paperType === 'lined'
-                  ? 'bg-blue-50 border-blue-500 text-blue-600'
-                  : 'bg-white border-gray-200 hover:border-gray-300'
-              }`}
-            >
-              <FileText size={20} className="mx-auto mb-1" />
-              <span className="text-xs">Lined</span>
-            </button>
-            <button
-              onClick={() => setPaperType('dotted')}
-              className={`p-3 rounded-lg border-2 transition-all ${
-                paperType === 'dotted'
-                  ? 'bg-blue-50 border-blue-500 text-blue-600'
-                  : 'bg-white border-gray-200 hover:border-gray-300'
-              }`}
-            >
-              <Circle size={20} className="mx-auto mb-1" />
-              <span className="text-xs">Dotted</span>
-            </button>
-            <button
-              onClick={() => setPaperType('grid')}
-              className={`p-3 rounded-lg border-2 transition-all ${
-                paperType === 'grid'
-                  ? 'bg-blue-50 border-blue-500 text-blue-600'
-                  : 'bg-white border-gray-200 hover:border-gray-300'
-              }`}
-            >
-              <Grid size={20} className="mx-auto mb-1" />
-              <span className="text-xs">Grid</span>
-            </button>
-          </div>
+          {sidebarOpen ? (
+            <>
+              <h3 className="text-sm font-medium text-gray-900 mb-3">Paper</h3>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={() => setPaperType('plain')}
+                  className={`p-3 rounded-lg border-2 transition-all ${
+                    paperType === 'plain'
+                      ? 'bg-blue-50 border-blue-500 text-blue-600'
+                      : 'bg-white border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <Minus size={20} className="mx-auto mb-1" />
+                  <span className="text-xs">Plain</span>
+                </button>
+                <button
+                  onClick={() => setPaperType('lined')}
+                  className={`p-3 rounded-lg border-2 transition-all ${
+                    paperType === 'lined'
+                      ? 'bg-blue-50 border-blue-500 text-blue-600'
+                      : 'bg-white border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <FileText size={20} className="mx-auto mb-1" />
+                  <span className="text-xs">Lined</span>
+                </button>
+                <button
+                  onClick={() => setPaperType('dotted')}
+                  className={`p-3 rounded-lg border-2 transition-all ${
+                    paperType === 'dotted'
+                      ? 'bg-blue-50 border-blue-500 text-blue-600'
+                      : 'bg-white border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <Circle size={20} className="mx-auto mb-1" />
+                  <span className="text-xs">Dotted</span>
+                </button>
+                <button
+                  onClick={() => setPaperType('grid')}
+                  className={`p-3 rounded-lg border-2 transition-all ${
+                    paperType === 'grid'
+                      ? 'bg-blue-50 border-blue-500 text-blue-600'
+                      : 'bg-white border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <Grid size={20} className="mx-auto mb-1" />
+                  <span className="text-xs">Grid</span>
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="space-y-2">
+              <button
+                onClick={() => setPaperType('plain')}
+                className={`w-full p-2 rounded-lg border-2 transition-all ${
+                  paperType === 'plain'
+                    ? 'bg-blue-50 border-blue-500'
+                    : 'bg-white border-gray-200 hover:border-gray-300'
+                }`}
+              >
+                <Minus size={16} className="mx-auto" />
+              </button>
+              <button
+                onClick={() => setPaperType('lined')}
+                className={`w-full p-2 rounded-lg border-2 transition-all ${
+                  paperType === 'lined'
+                    ? 'bg-blue-50 border-blue-500'
+                    : 'bg-white border-gray-200 hover:border-gray-300'
+                }`}
+              >
+                <FileText size={16} className="mx-auto" />
+              </button>
+              <button
+                onClick={() => setPaperType('dotted')}
+                className={`w-full p-2 rounded-lg border-2 transition-all ${
+                  paperType === 'dotted'
+                    ? 'bg-blue-50 border-blue-500'
+                    : 'bg-white border-gray-200 hover:border-gray-300'
+                }`}
+              >
+                <Circle size={16} className="mx-auto" />
+              </button>
+              <button
+                onClick={() => setPaperType('grid')}
+                className={`w-full p-2 rounded-lg border-2 transition-all ${
+                  paperType === 'grid'
+                    ? 'bg-blue-50 border-blue-500'
+                    : 'bg-white border-gray-200 hover:border-gray-300'
+                }`}
+              >
+                <Grid size={16} className="mx-auto" />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Brush Settings */}
         <div className="p-4 border-b border-gray-200">
-          <h3 className="text-sm font-medium text-gray-900 mb-3">Brush</h3>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-xs text-gray-600 mb-1">Color</label>
+          {sidebarOpen ? (
+            <>
+              <h3 className="text-sm font-medium text-gray-900 mb-3">Brush</h3>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-xs text-gray-600 mb-1">Color</label>
+                  <input
+                    type="color"
+                    value={color}
+                    onChange={(e) => setColor(e.target.value)}
+                    className="w-full h-8 border border-gray-300 rounded"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-600 mb-1">Size: {brushSize}px</label>
+                  <input
+                    type="range"
+                    min="1"
+                    max="50"
+                    value={brushSize}
+                    onChange={(e) => setBrushSize(Number(e.target.value))}
+                    className="w-full"
+                  />
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="space-y-2">
               <input
                 type="color"
                 value={color}
                 onChange={(e) => setColor(e.target.value)}
                 className="w-full h-8 border border-gray-300 rounded"
               />
-            </div>
-            <div>
-              <label className="block text-xs text-gray-600 mb-1">Size: {brushSize}px</label>
               <input
                 type="range"
                 min="1"
@@ -328,9 +446,10 @@ const AppClean: React.FC = () => {
                 value={brushSize}
                 onChange={(e) => setBrushSize(Number(e.target.value))}
                 className="w-full"
+                style={{ writingMode: 'bt-lr' }}
               />
             </div>
-          </div>
+          )}
         </div>
 
         {/* Actions */}
@@ -352,6 +471,14 @@ const AppClean: React.FC = () => {
 
       {/* Canvas Area */}
       <div className="flex-1 bg-white relative overflow-hidden">
+        {/* Toggle Sidebar Button */}
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="absolute top-4 left-4 z-10 p-2 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 transition-colors"
+        >
+          {sidebarOpen ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
+        </button>
+
         <canvas
           ref={backgroundCanvasRef}
           className="absolute inset-0"
