@@ -202,5 +202,5 @@ MIT License - see [LICENSE](LICENSE) for details.
 </p>
 
 <p align="center">
-  <sub>X-Sketch Pro // Ver. 2026.1 // Cyber Drive Sketching System</sub>
+  <sub>X-Sketch Pro // Ver. 2026.1 // Cyber Drive Sketching System - Updated</sub>
 </p>
