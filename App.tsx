@@ -86,8 +86,18 @@ const App: React.FC = () => {
     const handleResize = () => {
       setCanvasSize({ width: window.innerWidth, height: window.innerHeight });
     };
+
+    // Set initial size
+    handleResize();
+
+    // Handle both resize and orientation change
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+    };
   }, []);
 
   useEffect(() => {
