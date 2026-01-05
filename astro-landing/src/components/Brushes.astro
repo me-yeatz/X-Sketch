@@ -1,0 +1,303 @@
+---
+// Brushes section
+---
+
+<section class="brushes" id="brushes">
+  <div class="brushes-header">
+    <div class="section-badge">⚡ BRUSH_ENGINE</div>
+    <h2 class="section-title">ADVANCED BRUSH ENGINE</h2>
+    <p class="section-subtitle">Precision tools for every creative need</p>
+  </div>
+
+  <div class="brushes-content">
+    <div class="brushes-list">
+      <div class="brush-item">
+        <div class="brush-indicator"></div>
+        <div class="brush-info">
+          <div class="brush-name">SMOOTH</div>
+          <div class="brush-desc">Quadratic Bezier curves for smooth ink</div>
+        </div>
+      </div>
+
+      <div class="brush-item">
+        <div class="brush-indicator"></div>
+        <div class="brush-info">
+          <div class="brush-name">PENCIL</div>
+          <div class="brush-desc">Textured, slightly rough edges</div>
+        </div>
+      </div>
+
+      <div class="brush-item">
+        <div class="brush-indicator"></div>
+        <div class="brush-info">
+          <div class="brush-name">MARKER</div>
+          <div class="brush-desc">Bold, slightly transparent, flat edges</div>
+        </div>
+      </div>
+
+      <div class="brush-item">
+        <div class="brush-indicator"></div>
+        <div class="brush-info">
+          <div class="brush-name">SPRAY</div>
+          <div class="brush-desc">Particle-based spray paint effect</div>
+        </div>
+      </div>
+
+      <div class="brush-item">
+        <div class="brush-indicator"></div>
+        <div class="brush-info">
+          <div class="brush-name">CALLIGRAPHY</div>
+          <div class="brush-desc">Variable width with angle sensitivity</div>
+        </div>
+      </div>
+
+      <div class="brush-item">
+        <div class="brush-indicator"></div>
+        <div class="brush-info">
+          <div class="brush-name">WATERCOLOR</div>
+          <div class="brush-desc">Soft, diffused watercolor effect</div>
+        </div>
+      </div>
+
+      <div class="brush-item">
+        <div class="brush-indicator"></div>
+        <div class="brush-info">
+          <div class="brush-name">OIL</div>
+          <div class="brush-desc">Textured oil paint strokes</div>
+        </div>
+      </div>
+
+      <div class="brush-item">
+        <div class="brush-indicator"></div>
+        <div class="brush-info">
+          <div class="brush-name">INK PEN</div>
+          <div class="brush-desc">Precise ink pen with pressure</div>
+        </div>
+      </div>
+
+      <div class="brush-item">
+        <div class="brush-indicator"></div>
+        <div class="brush-info">
+          <div class="brush-name">AIRBRUSH</div>
+          <div class="brush-desc">Soft, diffused airbrush effect</div>
+        </div>
+      </div>
+
+      <div class="brush-item">
+        <div class="brush-indicator"></div>
+        <div class="brush-info">
+          <div class="brush-name">CHARCOAL</div>
+          <div class="brush-desc">Rough, textured charcoal strokes</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brushes-preview">
+      <div class="preview-card">
+        <div class="preview-header">
+          <div class="preview-badge">BRUSH_PREVIEW</div>
+        </div>
+        <div class="preview-content">
+          <div class="preview-stroke preview-stroke-1"></div>
+          <div class="preview-stroke preview-stroke-2"></div>
+          <div class="preview-stroke preview-stroke-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .brushes {
+    padding: 100px 64px;
+    background: var(--black);
+    border-top: 3px solid var(--blue);
+    border-bottom: 3px solid var(--blue);
+  }
+
+  .brushes-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .section-badge {
+    display: inline-block;
+    background: var(--black);
+    color: var(--cyan);
+    border: 2px solid var(--cyan);
+    padding: 8px 16px;
+    font-weight: 900;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    margin: 0 0 16px 0;
+  }
+
+  .section-subtitle {
+    font-size: 18px;
+    color: var(--white);
+    opacity: 0.7;
+    margin: 0;
+    font-family: 'Courier New', monospace;
+  }
+
+  .brushes-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .brushes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .brush-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: #0D0D10;
+    border: 2px solid var(--blue);
+    transition: all 0.2s ease;
+  }
+
+  .brush-item:hover {
+    border-color: var(--cyan);
+    transform: translateX(8px);
+  }
+
+  .brush-indicator {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--cyan);
+    background: var(--cyan);
+    flex-shrink: 0;
+  }
+
+  .brush-info {
+    flex: 1;
+  }
+
+  .brush-name {
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  .brush-desc {
+    font-size: 12px;
+    color: var(--white);
+    opacity: 0.7;
+    font-family: 'Courier New', monospace;
+  }
+
+  .brushes-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .preview-card {
+    background: var(--black);
+    border: 3px solid var(--cyan);
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 12px 12px 0 var(--blue);
+  }
+
+  .preview-header {
+    background: var(--blue);
+    padding: 12px;
+    border-bottom: 3px solid var(--cyan);
+  }
+
+  .preview-badge {
+    color: var(--black);
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .preview-content {
+    padding: 32px;
+    background: #0D0D10;
+    min-height: 320px;
+    position: relative;
+  }
+
+  .preview-stroke {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.8;
+  }
+
+  .preview-stroke-1 {
+    width: 240px;
+    height: 60px;
+    top: 60px;
+    left: 60px;
+    transform: rotate(-15deg);
+    border: 4px solid var(--cyan);
+  }
+
+  .preview-stroke-2 {
+    width: 200px;
+    height: 80px;
+    top: 120px;
+    left: 120px;
+    transform: rotate(10deg);
+    border: 4px solid var(--blue);
+  }
+
+  .preview-stroke-3 {
+    width: 180px;
+    height: 40px;
+    top: 200px;
+    left: 80px;
+    transform: rotate(-5deg);
+    border: 4px solid var(--white);
+  }
+
+  @media (max-width: 1024px) {
+    .brushes-content {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .brushes {
+      padding: 64px 20px;
+    }
+
+    .section-title {
+      font-size: 32px;
+    }
+
+    .brush-item {
+      padding: 12px;
+    }
+
+    .brush-indicator {
+      width: 32px;
+      height: 32px;
+    }
+  }
+</style>

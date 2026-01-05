@@ -1,0 +1,202 @@
+---
+// CTA section
+---
+
+<section class="showcase" id="showcase">
+  <div class="showcase-content">
+    <div class="showcase-badge">⚡ READY_TO_SKETCH</div>
+    <h2 class="showcase-title">LAUNCH X-SKETCH PRO NOW</h2>
+    <p class="showcase-subtitle">
+      No sign-up required. Optimized for Android tablets. Just open and start creating professional artwork.
+    </p>
+
+    <div class="showcase-buttons">
+      <a href="/app" class="btn-primary">LAUNCH_X-SKETCH_PRO</a>
+      <a href="https://github.com/me-yeatz/X-Sketch" target="_blank" class="btn-secondary">VIEW_ON_GITHUB</a>
+    </div>
+
+    <div class="showcase-features">
+      <div class="showcase-item">
+        <div class="showcase-icon">⚡</div>
+        <div class="showcase-text">INSTANT_LOAD</div>
+      </div>
+      <div class="showcase-item">
+        <div class="showcase-icon">📱</div>
+        <div class="showcase-text">TABLET_READY</div>
+      </div>
+      <div class="showcase-item">
+        <div class="showcase-icon">🎨</div>
+        <div class="showcase-text">PRO_TOOLS</div>
+      </div>
+      <div class="showcase-item">
+        <div class="showcase-icon">💾</div>
+        <div class="showcase-text">OFFLINE_READY</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .showcase {
+    padding: 120px 64px;
+    background: var(--cyan);
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .showcase::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 12px;
+    right: -12px;
+    bottom: 12px;
+    border: 3px solid var(--blue);
+    background: var(--black);
+    z-index: -1;
+  }
+
+  .showcase-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .showcase-badge {
+    display: inline-block;
+    background: var(--black);
+    color: var(--cyan);
+    border: 2px solid var(--cyan);
+    padding: 10px 20px;
+    font-weight: 900;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+
+  .showcase-title {
+    font-size: 56px;
+    font-weight: 900;
+    color: var(--black);
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    margin: 0 0 24px 0;
+  }
+
+  .showcase-subtitle {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--black);
+    opacity: 0.8;
+    margin: 0 0 40px 0;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Courier New', monospace;
+  }
+
+  .showcase-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 48px;
+  }
+
+  .btn-primary {
+    background: var(--blue);
+    color: var(--white);
+    border: 4px solid var(--black);
+    padding: 20px 40px;
+    font-weight: 900;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-block;
+    box-shadow: 8px 8px 0 var(--black);
+  }
+
+  .btn-primary:hover {
+    background: var(--cyan);
+    transform: translate(-3px, -3px);
+    box-shadow: 12px 12px 0 var(--black);
+  }
+
+  .btn-secondary {
+    background: var(--white);
+    color: var(--black);
+    border: 4px solid var(--black);
+    padding: 20px 40px;
+    font-weight: 900;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-block;
+    box-shadow: 8px 8px 0 var(--black);
+  }
+
+  .btn-secondary:hover {
+    background: var(--cyan);
+    transform: translate(-3px, -3px);
+    box-shadow: 12px 12px 0 var(--black);
+  }
+
+  .showcase-features {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .showcase-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .showcase-icon {
+    font-size: 36px;
+  }
+
+  .showcase-text {
+    font-size: 12px;
+    font-weight: 900;
+    color: var(--black);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 768px) {
+    .showcase {
+      padding: 80px 20px;
+    }
+
+    .showcase-title {
+      font-size: 36px;
+    }
+
+    .showcase-subtitle {
+      font-size: 16px;
+    }
+
+    .showcase-buttons {
+      flex-direction: column;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      width: 100%;
+      text-align: center;
+    }
+
+    .showcase-features {
+      gap: 24px;
+    }
+  }
+</style>

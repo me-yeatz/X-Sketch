@@ -1,0 +1,49 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="X-SKETCH - Professional tablet sketching application optimized for Android tablets" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/icon.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} | X-SKETCH</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --black: #0A0A0C;
+    --white: #E2E2D0;
+    --blue: #72A0C1;
+    --cyan: #A5D8FF;
+    --red: #EF4444;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', monospace;
+    background: var(--black);
+    color: var(--white);
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+</style>

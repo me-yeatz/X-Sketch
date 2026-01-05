@@ -1,0 +1,167 @@
+---
+// Features section
+---
+
+<section class="features" id="features">
+  <div class="features-header">
+    <div class="section-badge">⚡ SYSTEM_CAPABILITIES</div>
+    <h2 class="section-title">EVERYTHING YOU NEED</h2>
+    <p class="section-subtitle">Advanced tools for professional digital sketching</p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🖌️</div>
+      <h3 class="feature-title">10 BRUSH TYPES</h3>
+      <p class="feature-description">
+        From smooth ink to watercolor, oil, airbrush and more. Each brush responds to pressure and movement for professional results.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">✋</div>
+      <h3 class="feature-title">PALM REJECTION</h3>
+      <p class="feature-description">
+        Advanced palm rejection engine optimized for Android tablets. Prevents accidental touches during sketching sessions.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">📚</div>
+      <h3 class="feature-title">LAYER SUPPORT</h3>
+      <p class="feature-description">
+        Multi-layer canvas with opacity controls. Organize your artwork with dedicated layer management for complex compositions.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🎨</div>
+      <h3 class="feature-title">COLOR SYSTEM</h3>
+      <p class="feature-description">
+        Full color palette with opacity controls. Cyber-themed color options optimized for digital art and design work.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">💾</div>
+      <h3 class="feature-title">EXPORT OPTIONS</h3>
+      <p class="feature-description">
+        Export to PNG, JPG, SVG, and PDF formats. High-quality output for all your creative needs and professional use cases.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">📱</div>
+      <h3 class="feature-title">TABLET OPTIMIZED</h3>
+      <p class="feature-description">
+        Designed specifically for Android tablets like the Infinix XPad. Full stylus and touch support with low-latency rendering.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .features {
+    padding: 100px 64px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .features-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .section-badge {
+    display: inline-block;
+    background: var(--black);
+    color: var(--cyan);
+    border: 2px solid var(--cyan);
+    padding: 8px 16px;
+    font-weight: 900;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    margin: 0 0 16px 0;
+  }
+
+  .section-subtitle {
+    font-size: 18px;
+    color: var(--white);
+    opacity: 0.7;
+    margin: 0;
+    font-family: 'Courier New', monospace;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .feature-card {
+    background: var(--black);
+    border: 3px solid var(--blue);
+    padding: 32px;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  .feature-card:hover {
+    border-color: var(--cyan);
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--cyan);
+  }
+
+  .feature-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+
+  .feature-title {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 12px 0;
+  }
+
+  .feature-description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--white);
+    opacity: 0.8;
+    margin: 0;
+    font-family: 'Courier New', monospace;
+  }
+
+  @media (max-width: 1024px) {
+    .features-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .features {
+      padding: 64px 20px;
+    }
+
+    .section-title {
+      font-size: 32px;
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
