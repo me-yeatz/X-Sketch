@@ -8,18 +8,107 @@ import {
   Palette,
   Settings,
   Download,
-  RotateCcw
+  RotateCcw,
+  FileText,
+  Grid,
+  Circle,
+  Minus
 } from 'lucide-react';
+import { PalmRejectionEngine } from './services/PalmRejectionEngine';
+import { PalmRejectionLevel } from './types';
+
+type PaperType = 'plain' | 'lined' | 'dotted' | 'grid';
 
 const AppClean: React.FC = () => {
   const [activeTool, setActiveTool] = useState<'pen' | 'eraser' | 'pan'>('pen');
-  const [brushSize, setBrushSize] = useState(5);
+  const [brushSize, setBrushSize] = useState(2);
   const [color, setColor] = useState('#000000');
   const [strokes, setStrokes] = useState<any[]>([]);
+  const [paperType, setPaperType] = useState<PaperType>('plain');
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const backgroundCanvasRef = useRef<HTMLCanvasElement>(null);
   const isDrawing = useRef(false);
+  const palmRejection = useRef(new PalmRejectionEngine({
+    level: PalmRejectionLevel.MEDIUM,
+    maxTouchWidth: 20,
+    maxTouchHeight: 20,
+    requirePressure: false,
+    debugMode: false
+  }));
 
-  const handleMouseDown = (e: React.MouseEvent) => {
+  // Load from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem('sketch-strokes');
+    if (saved) {
+      setStrokes(JSON.parse(saved));
+    }
+  }, []);
+
+  // Save to localStorage
+  useEffect(() => {
+    localStorage.setItem('sketch-strokes', JSON.stringify(strokes));
+  }, [strokes]);
+
+  // Draw paper background
+  const drawPaperBackground = useCallback(() => {
+    const canvas = backgroundCanvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (paperType === 'lined') {
+      ctx.strokeStyle = '#e5e7eb';
+      ctx.lineWidth = 1;
+      for (let y = 30; y < canvas.height; y += 30) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+    } else if (paperType === 'dotted') {
+      ctx.fillStyle = '#d1d5db';
+      for (let x = 20; x < canvas.width; x += 20) {
+        for (let y = 20; y < canvas.height; y += 20) {
+          ctx.beginPath();
+          ctx.arc(x, y, 1, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    } else if (paperType === 'grid') {
+      ctx.strokeStyle = '#e5e7eb';
+      ctx.lineWidth = 1;
+      const spacing = 20;
+      for (let x = spacing; x < canvas.width; x += spacing) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      }
+      for (let y = spacing; y < canvas.height; y += spacing) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+    }
+    // plain does nothing
+  }, [paperType]);
+
+  useEffect(() => {
+    drawPaperBackground();
+  }, [drawPaperBackground]);
+
+  const handleMouseDown = (e: React.PointerEvent) => {
+    const touch = e.pointerType === 'touch';
+    if (touch && !palmRejection.current.shouldAcceptEvent({
+      pointerType: e.pointerType,
+      width: e.width,
+      height: e.height,
+      pressure: e.pressure
+    }).accept) {
+      return;
+    }
     isDrawing.current = true;
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -30,7 +119,7 @@ const AppClean: React.FC = () => {
     setStrokes(prev => [...prev, { tool: activeTool, color, size: brushSize, points: [{ x, y }] }]);
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleMouseMove = (e: React.PointerEvent) => {
     if (!isDrawing.current) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -81,25 +170,58 @@ const AppClean: React.FC = () => {
   return (
     <div className="h-screen bg-white flex flex-col">
       {/* Toolbar */}
-      <div className="bg-gray-100 border-b border-gray-300 p-4 flex items-center gap-4">
-        <button
-          onClick={() => setActiveTool('pen')}
-          className={`p-2 rounded ${activeTool === 'pen' ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200'}`}
-        >
-          <Pencil size={20} />
-        </button>
-        <button
-          onClick={() => setActiveTool('eraser')}
-          className={`p-2 rounded ${activeTool === 'eraser' ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200'}`}
-        >
-          <Eraser size={20} />
-        </button>
-        <button
-          onClick={() => setActiveTool('pan')}
-          className={`p-2 rounded ${activeTool === 'pan' ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200'}`}
-        >
-          <Move size={20} />
-        </button>
+      <div className="bg-gray-100 border-b border-gray-300 p-4 flex items-center gap-4 flex-wrap">
+        {/* Tools */}
+        <div className="flex gap-2">
+          <button
+            onClick={() => setActiveTool('pen')}
+            className={`p-2 rounded ${activeTool === 'pen' ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200'}`}
+          >
+            <Pencil size={20} />
+          </button>
+          <button
+            onClick={() => setActiveTool('eraser')}
+            className={`p-2 rounded ${activeTool === 'eraser' ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200'}`}
+          >
+            <Eraser size={20} />
+          </button>
+          <button
+            onClick={() => setActiveTool('pan')}
+            className={`p-2 rounded ${activeTool === 'pan' ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200'}`}
+          >
+            <Move size={20} />
+          </button>
+        </div>
+
+        {/* Paper Types */}
+        <div className="flex gap-2">
+          <button
+            onClick={() => setPaperType('plain')}
+            className={`p-2 rounded ${paperType === 'plain' ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200'}`}
+          >
+            <Minus size={20} />
+          </button>
+          <button
+            onClick={() => setPaperType('lined')}
+            className={`p-2 rounded ${paperType === 'lined' ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200'}`}
+          >
+            <FileText size={20} />
+          </button>
+          <button
+            onClick={() => setPaperType('dotted')}
+            className={`p-2 rounded ${paperType === 'dotted' ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200'}`}
+          >
+            <Circle size={20} />
+          </button>
+          <button
+            onClick={() => setPaperType('grid')}
+            className={`p-2 rounded ${paperType === 'grid' ? 'bg-blue-500 text-white' : 'bg-white hover:bg-gray-200'}`}
+          >
+            <Grid size={20} />
+          </button>
+        </div>
+
+        {/* Color and Size */}
         <div className="flex items-center gap-2">
           <Palette size={16} />
           <input
@@ -114,13 +236,15 @@ const AppClean: React.FC = () => {
           <input
             type="range"
             min="1"
-            max="50"
+            max="20"
             value={brushSize}
             onChange={(e) => setBrushSize(Number(e.target.value))}
             className="w-20"
           />
           <span className="text-sm">{brushSize}px</span>
         </div>
+
+        {/* Actions */}
         <div className="ml-auto flex gap-2">
           <button onClick={undo} className="p-2 bg-white hover:bg-gray-200 rounded">
             <Undo size={20} />
@@ -133,14 +257,20 @@ const AppClean: React.FC = () => {
       {/* Canvas */}
       <div className="flex-1 bg-white relative">
         <canvas
+          ref={backgroundCanvasRef}
+          width={window.innerWidth}
+          height={window.innerHeight - 80}
+          className="absolute inset-0"
+        />
+        <canvas
           ref={canvasRef}
           width={window.innerWidth}
           height={window.innerHeight - 80}
-          className="cursor-crosshair"
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
+          className="absolute inset-0 cursor-crosshair"
+          onPointerDown={handleMouseDown}
+          onPointerMove={handleMouseMove}
+          onPointerUp={handleMouseUp}
+          onPointerLeave={handleMouseUp}
         />
       </div>
     </div>
