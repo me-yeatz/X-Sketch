@@ -25,9 +25,12 @@ const AppClean: React.FC = () => {
   const [color, setColor] = useState('#000000');
   const [strokes, setStrokes] = useState<any[]>([]);
   const [paperType, setPaperType] = useState<PaperType>('plain');
+  const [panOffset, setPanOffset] = useState({ x: 0, y: 0 });
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const backgroundCanvasRef = useRef<HTMLCanvasElement>(null);
   const isDrawing = useRef(false);
+  const isPanning = useRef(false);
+  const lastPanPoint = useRef({ x: 0, y: 0 });
   const palmRejection = useRef(new PalmRejectionEngine({
     level: PalmRejectionLevel.MEDIUM,
     maxTouchWidth: 20,
@@ -56,6 +59,8 @@ const AppClean: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.save();
+    ctx.translate(panOffset.x, panOffset.y);
 
     if (paperType === 'lined') {
       ctx.strokeStyle = '#e5e7eb';
@@ -93,10 +98,26 @@ const AppClean: React.FC = () => {
       }
     }
     // plain does nothing
-  }, [paperType]);
+    ctx.restore();
+  }, [paperType, panOffset]);
 
   useEffect(() => {
-    drawPaperBackground();
+    const resizeCanvas = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight - 80;
+      if (backgroundCanvasRef.current) {
+        backgroundCanvasRef.current.width = width;
+        backgroundCanvasRef.current.height = height;
+      }
+      if (canvasRef.current) {
+        canvasRef.current.width = width;
+        canvasRef.current.height = height;
+      }
+      drawPaperBackground();
+    };
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    return () => window.removeEventListener('resize', resizeCanvas);
   }, [drawPaperBackground]);
 
   const handleMouseDown = (e: React.PointerEvent) => {
@@ -109,34 +130,46 @@ const AppClean: React.FC = () => {
     }).accept) {
       return;
     }
-    isDrawing.current = true;
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    // Start new stroke
-    setStrokes(prev => [...prev, { tool: activeTool, color, size: brushSize, points: [{ x, y }] }]);
+    if (activeTool === 'pan') {
+      isPanning.current = true;
+      lastPanPoint.current = { x: e.clientX, y: e.clientY };
+    } else {
+      isDrawing.current = true;
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left - panOffset.x;
+      const y = e.clientY - rect.top - panOffset.y;
+      // Start new stroke
+      setStrokes(prev => [...prev, { tool: activeTool, color, size: brushSize, points: [{ x, y }] }]);
+    }
   };
 
   const handleMouseMove = (e: React.PointerEvent) => {
-    if (!isDrawing.current) return;
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    // Add point to current stroke
-    setStrokes(prev => {
-      const newStrokes = [...prev];
-      const current = newStrokes[newStrokes.length - 1];
-      current.points.push({ x, y });
-      return newStrokes;
-    });
+    if (isPanning.current) {
+      const dx = e.clientX - lastPanPoint.current.x;
+      const dy = e.clientY - lastPanPoint.current.y;
+      setPanOffset(prev => ({ x: prev.x + dx, y: prev.y + dy }));
+      lastPanPoint.current = { x: e.clientX, y: e.clientY };
+    } else if (isDrawing.current) {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left - panOffset.x;
+      const y = e.clientY - rect.top - panOffset.y;
+      // Add point to current stroke
+      setStrokes(prev => {
+        const newStrokes = [...prev];
+        const current = newStrokes[newStrokes.length - 1];
+        current.points.push({ x, y });
+        return newStrokes;
+      });
+    }
   };
 
   const handleMouseUp = () => {
     isDrawing.current = false;
+    isPanning.current = false;
   };
 
   useEffect(() => {
@@ -145,7 +178,10 @@ const AppClean: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.save();
+    ctx.translate(panOffset.x, panOffset.y);
     strokes.forEach(stroke => {
+      ctx.globalCompositeOperation = stroke.tool === 'eraser' ? 'destination-out' : 'source-over';
       ctx.strokeStyle = stroke.color;
       ctx.lineWidth = stroke.size;
       ctx.lineCap = 'round';
@@ -157,7 +193,9 @@ const AppClean: React.FC = () => {
       });
       ctx.stroke();
     });
-  }, [strokes]);
+    ctx.restore();
+    ctx.globalCompositeOperation = 'source-over';
+  }, [strokes, panOffset]);
 
   const clearCanvas = () => {
     setStrokes([]);
